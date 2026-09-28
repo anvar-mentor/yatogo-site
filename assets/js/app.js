@@ -7,7 +7,6 @@
   var CFG   = window.SITE_CONFIG || {};
   var DICT  = window.I18N || {};
   var LANGS = ['ru', 'uz', 'en'];
-  var STORE = 'yatogo.lang';
   var lang  = 'ru';
 
   function t(key) {
@@ -107,6 +106,19 @@
 
     document.documentElement.lang = t('html.lang');
     document.title = t('meta.title');
+    var canonical = 'https://yatogo.ru/' + (lang === 'ru' ? '' : '?lang=' + lang);
+    $('link[rel="canonical"]').href = canonical;
+    $('meta[property="og:url"]').content = canonical;
+    var pageSchema = $('#page-schema');
+    if (pageSchema) {
+      var schema = JSON.parse(pageSchema.textContent);
+      schema.url = canonical;
+      schema['@id'] = canonical + '#webpage';
+      schema.name = t('meta.title');
+      schema.description = t('meta.desc');
+      schema.inLanguage = lang;
+      pageSchema.textContent = JSON.stringify(schema);
+    }
 
     var badge = $('#langCurrent');
     if (badge) badge.textContent = lang.toUpperCase();
@@ -119,11 +131,11 @@
     renderQuiz();
   }
 
-  function setLang(next, remember) {
+  function setLang(next, updateUrl) {
     if (LANGS.indexOf(next) === -1) return;
     lang = next;
-    if (remember !== false) { try { localStorage.setItem(STORE, next); } catch (e) {} }
     translate();
+    if (updateUrl === false) return;
     try {
       var url = new URL(window.location.href);
       url.searchParams.set('lang', next);   // URL уже несёт hash, добавлять его не нужно
@@ -133,25 +145,8 @@
 
   function detectLang() {
     var q = new URLSearchParams(window.location.search).get('lang');
-    if (q && LANGS.indexOf(q) !== -1) return q;
-    try {
-      var saved = localStorage.getItem(STORE);
-      if (saved && LANGS.indexOf(saved) !== -1) return saved;
-    } catch (e) {}
-    // Язык браузера/телефона — VPN на него не влияет, в отличие от IP.
-    // Смотрим весь список предпочтений: первый из поддерживаемых побеждает.
-    // Русскоязычные (ru, а также kk, ky, tg, be, uk — там почти все читают по-русски) → ru.
-    var prefs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'ru']);
-    var RU_AREA = ['ru', 'kk', 'ky', 'tg', 'be', 'uk'];
-    for (var i = 0; i < prefs.length; i++) {
-      var code = String(prefs[i]).toLowerCase().split('-')[0];
-      if (code === 'uz') return 'uz';
-      if (code === 'en') return 'en';
-      if (RU_AREA.indexOf(code) !== -1) return 'ru';
-    }
-    // Ничего из списка не подошло (например, только турецкий или китайский) —
-    // иностранцу понятнее английский, чем русский
-    return 'en';
+    // Один URL — один язык, независимо от браузера и сохранённых настроек.
+    return LANGS.indexOf(q) !== -1 ? q : 'ru';
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -173,7 +168,13 @@
       });
     }
     $$('#lang [data-lang]').forEach(function (b) {
-      b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); closeLang(); });
+      b.addEventListener('click', function (e) {
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        setLang(b.getAttribute('data-lang'));
+        closeLang();
+        langBtn.focus();
+      });
     });
     document.addEventListener('click', closeLang);
     document.addEventListener('keydown', function (e) {
@@ -830,6 +831,7 @@
     applyConfig();
     lang = detectLang();
     setLang(lang, false);
+    window.addEventListener('popstate', function () { setLang(detectLang(), false); });
     initHeader();
     initReveal();
     initTracker();

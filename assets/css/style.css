@@ -164,16 +164,16 @@ button,input,textarea,select{ font:inherit; color:inherit; }
   transition:opacity .18s var(--ease), transform .18s var(--ease), visibility .18s;
 }
 .lang[data-open="true"] .lang__menu{ opacity:1; visibility:visible; transform:none; }
-.lang__menu button{
+.lang__menu [data-lang]{
   display:flex; align-items:center; justify-content:space-between; gap:10px;
   width:100%; min-height:40px; padding:0 12px;
   background:none; border:0; border-radius:var(--r-sm);
   cursor:pointer; text-align:left; font-size:.9rem;
 }
-.lang__menu button:hover{ background:var(--bg-soft); }
-.lang__menu button[aria-current="true"]{ color:var(--accent); font-weight:600; }
+.lang__menu [data-lang]:hover{ background:var(--bg-soft); }
+.lang__menu [data-lang][aria-current="true"]{ color:var(--accent); font-weight:600; }
 .lang__check{ width:16px; height:16px; opacity:0; }
-.lang__menu button[aria-current="true"] .lang__check{ opacity:1; }
+.lang__menu [data-lang][aria-current="true"] .lang__check{ opacity:1; }
 
 /* Бургер */
 .burger{

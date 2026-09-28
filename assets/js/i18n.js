@@ -6,8 +6,12 @@ window.I18N = {
 
 /* ─────────────────────────── РУССКИЙ ─────────────────────────── */
 ru: {
+  "nav.menu": "Меню",
+  "nav.label": "Основная навигация",
+  "meta.imageAlt": "YATOGO — регистрация и сопровождение бизнеса в Узбекистане",
+  "meta.locale": "ru_RU",
   'meta.title': 'Регистрация бизнеса в Узбекистане под ключ — ООО и ИП | YATOGO',
-'meta.desc': 'Регистрация бизнеса в Узбекистане под ключ: открытие ООО и ИП, подготовка документов, получение ЭЦП, изготовление печати и помощь с открытием банковского счета.',
+  'meta.desc': 'Регистрация бизнеса в Узбекистане под ключ: открытие ООО и ИП, подготовка документов, получение ЭЦП, изготовление печати и помощь с открытием банковского счета.',
   'html.lang': 'ru',
 
   'nav.services': 'Услуги',
@@ -326,8 +330,13 @@ ru: {
 
 /* ─────────────────────────── O‘ZBEKCHA ─────────────────────────── */
 uz: {
-  'meta.title': 'YATOGO — O‘zbekistonda biznesni «kalit topshirish» asosida ro‘yxatdan o‘tkazish',
-  'meta.desc': 'O‘zbekistonda MChJ, QK MChJ va XK MChJ ro‘yxatdan o‘tkazish: ta’sis hujjatlari, JShShIR va ERI, yuridik manzil, muhr, hisob raqam. 2 kundan boshlab, to‘liq hamrohlik.',
+  "nav.menu": "Menyu",
+  "nav.label": "Asosiy navigatsiya",
+  "meta.imageAlt": "YATOGO — O‘zbekistonda biznesni ro‘yxatdan o‘tkazish va qo‘llab-quvvatlash",
+  "meta.locale": "uz_UZ",
+  "meta.title": "O‘zbekistonda biznesni ro‘yxatdan o‘tkazish — MChJ va YTT | YATOGO",
+
+  "meta.desc": "O‘zbekistonda MChJ va YTTni ro‘yxatdan o‘tkazishda yordam: hujjatlar, JShShIR, ERI, yuridik manzil, muhr va bank hisobvarag‘ini ochish.",
   'html.lang': 'uz',
 
   'nav.services': 'Xizmatlar',
@@ -348,7 +357,7 @@ uz: {
 
   'brand.slogan': 'Biznesingizga eshiklarni ochamiz',
   'hero.badge': 'Yuridik shaxsni ro‘yxatdan o‘tkazish — <b>2 ish kunidan</b>',
-  'hero.h1': 'O‘zbekistonda biznesni noldan tashkil etish',
+  "hero.h1": "O‘zbekistonda biznesni ro‘yxatdan o‘tkazish",
   'hero.sub': 'Butun jarayonni o‘z zimmamizga olamiz: huquqiy shaklni tanlashdan tortib hisob raqam ochishgacha. Siz biznesni rivojlantirasiz — biz hujjatlar, soliqlar va buxgalteriya bilan shug‘ullanamiz.',
   'hero.cta1': 'Ariza qoldirish',
   'hero.cta2': 'Telegramga yozish',
@@ -646,8 +655,13 @@ uz: {
 
 /* ─────────────────────────── ENGLISH ─────────────────────────── */
 en: {
-  'meta.title': 'YATOGO — turnkey company registration in Uzbekistan',
-  'meta.desc': 'Registering an LLC, joint-venture LLC or foreign-owned LLC in Uzbekistan: charter documents, PINFL and digital signature, legal address, company seal, bank account. From 2 days, full support.',
+  "nav.menu": "Menu",
+  "nav.label": "Main navigation",
+  "meta.imageAlt": "YATOGO — business registration and support in Uzbekistan",
+  "meta.locale": "en_US",
+  "meta.title": "Business registration in Uzbekistan — LLCs and sole traders | YATOGO",
+
+  "meta.desc": "Register a business in Uzbekistan with YATOGO: LLCs and sole traders, documents, PINFL, digital signatures, a legal address and help opening a bank account.",
   'html.lang': 'en',
 
   'nav.services': 'Services',
@@ -668,7 +682,7 @@ en: {
 
   'brand.slogan': 'Opening doors for your business',
   'hero.badge': 'Company registration — <b>from 2 business days</b>',
-  'hero.h1': 'Start and run your business in Uzbekistan',
+  "hero.h1": "Business registration in Uzbekistan",
   'hero.sub': 'We handle the entire process: from choosing the legal form to opening your bank account. You focus on growing the business — we take care of documents, taxes and accounting.',
   'hero.cta1': 'Request a call',
   'hero.cta2': 'Message on Telegram',
