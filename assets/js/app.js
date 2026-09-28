@@ -7,7 +7,6 @@
   var CFG   = window.SITE_CONFIG || {};
   var DICT  = window.I18N || {};
   var LANGS = ['ru', 'uz', 'en'];
-  var STORE = 'yatogo.lang';
   var lang  = 'ru';
 
   function t(key) {
@@ -43,6 +42,8 @@
   function buildCompareTable() {
     var tbody = $('#compareTable tbody');
     if (!tbody) return;
+    // Статические строки доступны до JS; генерация остаётся запасным вариантом.
+    if (tbody.children.length) return;
     var html = '';
     MATRIX.forEach(function (row) {
       html += '<tr><th scope="row" class="row-label" data-i18n="' + row[0] + '"></th>';
@@ -107,6 +108,19 @@
 
     document.documentElement.lang = t('html.lang');
     document.title = t('meta.title');
+    var canonical = 'https://yatogo.ru/' + (lang === 'ru' ? '' : '?lang=' + lang);
+    $('link[rel="canonical"]').href = canonical;
+    $('meta[property="og:url"]').content = canonical;
+    var pageSchema = $('#page-schema');
+    if (pageSchema) {
+      var schema = JSON.parse(pageSchema.textContent);
+      schema.url = canonical;
+      schema['@id'] = canonical + '#webpage';
+      schema.name = t('meta.title');
+      schema.description = t('meta.desc');
+      schema.inLanguage = lang;
+      pageSchema.textContent = JSON.stringify(schema);
+    }
 
     var badge = $('#langCurrent');
     if (badge) badge.textContent = lang.toUpperCase();
@@ -119,11 +133,11 @@
     renderQuiz();
   }
 
-  function setLang(next, remember) {
+  function setLang(next, updateUrl) {
     if (LANGS.indexOf(next) === -1) return;
     lang = next;
-    if (remember !== false) { try { localStorage.setItem(STORE, next); } catch (e) {} }
     translate();
+    if (updateUrl === false) return;
     try {
       var url = new URL(window.location.href);
       url.searchParams.set('lang', next);   // URL уже несёт hash, добавлять его не нужно
@@ -133,25 +147,8 @@
 
   function detectLang() {
     var q = new URLSearchParams(window.location.search).get('lang');
-    if (q && LANGS.indexOf(q) !== -1) return q;
-    try {
-      var saved = localStorage.getItem(STORE);
-      if (saved && LANGS.indexOf(saved) !== -1) return saved;
-    } catch (e) {}
-    // Язык браузера/телефона — VPN на него не влияет, в отличие от IP.
-    // Смотрим весь список предпочтений: первый из поддерживаемых побеждает.
-    // Русскоязычные (ru, а также kk, ky, tg, be, uk — там почти все читают по-русски) → ru.
-    var prefs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'ru']);
-    var RU_AREA = ['ru', 'kk', 'ky', 'tg', 'be', 'uk'];
-    for (var i = 0; i < prefs.length; i++) {
-      var code = String(prefs[i]).toLowerCase().split('-')[0];
-      if (code === 'uz') return 'uz';
-      if (code === 'en') return 'en';
-      if (RU_AREA.indexOf(code) !== -1) return 'ru';
-    }
-    // Ничего из списка не подошло (например, только турецкий или китайский) —
-    // иностранцу понятнее английский, чем русский
-    return 'en';
+    // Один URL — один язык, независимо от браузера и сохранённых настроек.
+    return LANGS.indexOf(q) !== -1 ? q : 'ru';
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -173,7 +170,13 @@
       });
     }
     $$('#lang [data-lang]').forEach(function (b) {
-      b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); closeLang(); });
+      b.addEventListener('click', function (e) {
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        setLang(b.getAttribute('data-lang'));
+        closeLang();
+        langBtn.focus();
+      });
     });
     document.addEventListener('click', closeLang);
     document.addEventListener('keydown', function (e) {
@@ -184,14 +187,17 @@
     function closeNav() {
       document.body.classList.remove('nav-open');
       if (burger) burger.setAttribute('aria-expanded', 'false');
+      if ($('#mobileNav')) $('#mobileNav').inert = true;
     }
     if (burger) {
       burger.addEventListener('click', function () {
         var open = document.body.classList.toggle('nav-open');
         burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        $('#mobileNav').inert = !open;
       });
     }
     $$('#mobileNav a').forEach(function (a) { a.addEventListener('click', closeNav); });
+    closeNav();
 
     var header = $('#header');
     var onScroll = function () {
@@ -215,11 +221,15 @@
       entries.forEach(function (entry, i) {
         if (!entry.isIntersecting) return;
         var el = entry.target;
-        setTimeout(function () { el.classList.add('is-in'); }, Math.min(i, 4) * 40);
+        setTimeout(function () { el.classList.remove('is-pending'); el.classList.add('is-in'); }, Math.min(i, 4) * 40);
         io.unobserve(el);
       });
     }, { rootMargin: '0px 0px 12% 0px', threshold: 0 });
-    items.forEach(function (el) { io.observe(el); });
+    items.forEach(function (el) {
+      // Уже видимый контент не скрываем повторно при запуске JS.
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('is-in');
+      else { io.observe(el); el.classList.add('is-pending'); }
+    });
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -254,6 +264,9 @@
   function initForm() {
     var form = $('#leadForm');
     if (!form) return;
+    $$('[data-service="ip"]').forEach(function (link) {
+      link.addEventListener('click', function () { $('#f-service').value = 'ip'; });
+    });
     var statusEl = $('#formStatus');
 
     function setStatus(key, state) {
@@ -287,7 +300,7 @@
       var data = {
         name:    $('#f-name').value.trim(),
         contact: $('#f-phone').value.trim(),
-        service: $('#f-service').value.trim(),
+        service: $('#f-service').value === 'ip' ? t('form.service.ip') : $('#f-service').value.trim(),
         plan:    $('#f-plan').value.trim(),
         comment: $('#f-comment').value.trim(),
         lang:    lang
@@ -339,6 +352,8 @@
           form.classList.remove('is-busy');
         });
     });
+    // В исходном HTML кнопка выключена: без JS данные не уйдут в URL через GET.
+    $('.form__submit', form).disabled = false;
   }
 
 
@@ -658,6 +673,7 @@
   function renderQuiz() {
     var body = $('#quizBody');
     if (!body) return;
+    $('#quiz').hidden = false;
     var step = quizAnswers.length;
     var html;
     if (step < QUIZ.length) {
@@ -830,6 +846,7 @@
     applyConfig();
     lang = detectLang();
     setLang(lang, false);
+    window.addEventListener('popstate', function () { setLang(detectLang(), false); });
     initHeader();
     initReveal();
     initTracker();
