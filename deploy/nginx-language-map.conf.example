@@ -1,0 +1,7 @@
+# REVIEW ONLY. Include inside nginx's http {} context, not server {}.
+# Existing public URLs stay unchanged. Case-sensitive matching agrees with app.js.
+map $arg_lang $yatogo_entry {
+    default /index.html;
+    ~^uz$ /seo/uz.html;
+    ~^en$ /seo/en.html;
+}

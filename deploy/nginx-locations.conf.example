@@ -1,0 +1,45 @@
+# REVIEW ONLY. Adapt inside the existing HTTPS server for yatogo.ru.
+# Keep the existing TLS certificates, listen directives and security headers.
+# Replace conflicting existing locations; do not append duplicate location / blocks.
+root /var/www/yatogo;
+index index.html;
+
+# Serve pre-rendered translations at the original ?lang= URLs.
+location = / {
+    try_files $yatogo_entry =404;
+    expires -1;
+}
+
+location = /index.html {
+    return 301 /$is_args$args;
+}
+
+# Internal render targets must not become additional public/indexable URLs.
+location ^~ /seo/ {
+    internal;
+    expires -1;
+}
+
+# Genuine 404s instead of serving the home page for arbitrary paths.
+location / {
+    try_files $uri $uri/ =404;
+    expires -1;
+}
+
+location = /site.config.js { expires -1; }
+# Deny hidden files before matching the general static-resource regex.
+location ~ /\. { deny all; }
+location ~* \.(css|js|svg|png|jpg|jpeg|webp|woff2)$ {
+    try_files $uri =404;
+    expires 7d;
+}
+
+# This repository is the web root: never serve Git metadata or maintenance files.
+location ^~ /scripts/ { return 404; }
+location ^~ /tests/ { return 404; }
+location ^~ /deploy/ { return 404; }
+location = /README.md { return 404; }
+
+# In separate, existing HTTP / www server blocks, use a permanent redirect:
+# return 301 https://yatogo.ru$request_uri;
+# Do not create/replace TLS configuration without inspecting the real server.
