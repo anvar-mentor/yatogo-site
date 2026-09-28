@@ -42,6 +42,8 @@
   function buildCompareTable() {
     var tbody = $('#compareTable tbody');
     if (!tbody) return;
+    // Статические строки доступны до JS; генерация остаётся запасным вариантом.
+    if (tbody.children.length) return;
     var html = '';
     MATRIX.forEach(function (row) {
       html += '<tr><th scope="row" class="row-label" data-i18n="' + row[0] + '"></th>';
@@ -185,14 +187,17 @@
     function closeNav() {
       document.body.classList.remove('nav-open');
       if (burger) burger.setAttribute('aria-expanded', 'false');
+      if ($('#mobileNav')) $('#mobileNav').inert = true;
     }
     if (burger) {
       burger.addEventListener('click', function () {
         var open = document.body.classList.toggle('nav-open');
         burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        $('#mobileNav').inert = !open;
       });
     }
     $$('#mobileNav a').forEach(function (a) { a.addEventListener('click', closeNav); });
+    closeNav();
 
     var header = $('#header');
     var onScroll = function () {
@@ -216,11 +221,15 @@
       entries.forEach(function (entry, i) {
         if (!entry.isIntersecting) return;
         var el = entry.target;
-        setTimeout(function () { el.classList.add('is-in'); }, Math.min(i, 4) * 40);
+        setTimeout(function () { el.classList.remove('is-pending'); el.classList.add('is-in'); }, Math.min(i, 4) * 40);
         io.unobserve(el);
       });
     }, { rootMargin: '0px 0px 12% 0px', threshold: 0 });
-    items.forEach(function (el) { io.observe(el); });
+    items.forEach(function (el) {
+      // Уже видимый контент не скрываем повторно при запуске JS.
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('is-in');
+      else { io.observe(el); el.classList.add('is-pending'); }
+    });
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -255,6 +264,9 @@
   function initForm() {
     var form = $('#leadForm');
     if (!form) return;
+    $$('[data-service="ip"]').forEach(function (link) {
+      link.addEventListener('click', function () { $('#f-service').value = 'ip'; });
+    });
     var statusEl = $('#formStatus');
 
     function setStatus(key, state) {
@@ -288,7 +300,7 @@
       var data = {
         name:    $('#f-name').value.trim(),
         contact: $('#f-phone').value.trim(),
-        service: $('#f-service').value.trim(),
+        service: $('#f-service').value === 'ip' ? t('form.service.ip') : $('#f-service').value.trim(),
         plan:    $('#f-plan').value.trim(),
         comment: $('#f-comment').value.trim(),
         lang:    lang
@@ -340,6 +352,8 @@
           form.classList.remove('is-busy');
         });
     });
+    // В исходном HTML кнопка выключена: без JS данные не уйдут в URL через GET.
+    $('.form__submit', form).disabled = false;
   }
 
 
@@ -659,6 +673,7 @@
   function renderQuiz() {
     var body = $('#quizBody');
     if (!body) return;
+    $('#quiz').hidden = false;
     var step = quizAnswers.length;
     var html;
     if (step < QUIZ.length) {

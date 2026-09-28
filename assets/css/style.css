@@ -57,6 +57,10 @@ a{ color:inherit; text-decoration:none; }
 img,svg{ display:block; max-width:100%; }
 /* спрайт иконок: без этого svg{display:block} перебивал hidden и давал пустую полосу над шапкой */
 svg[hidden]{ display:none !important; }
+[hidden]{ display:none !important; }
+.nojs-nav{ display:flex; flex-wrap:wrap; gap:16px; padding:16px; }
+.ip-card{ margin-top:28px; }
+.ip-card .btn{ margin-top:20px; }
 button,input,textarea,select{ font:inherit; color:inherit; }
 
 :focus-visible{
@@ -450,7 +454,7 @@ td.is-center,th.is-center{ text-align:center; }
 .footer__top{ display:grid; gap:28px; grid-template-columns:1fr; }
 @media (min-width:760px){ .footer__top{ grid-template-columns:1.4fr 1fr 1fr; } }
 .footer__text{ margin-top:14px; font-size:.88rem; color:var(--muted); max-width:340px; }
-.footer h4{ font-size:.78rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+.footer__heading{ font-size:.78rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
 .footer__links{ display:grid; gap:10px; font-size:.9rem; }
 .footer__links a:hover{ color:var(--accent); }
 .footer__bottom{
@@ -478,7 +482,8 @@ td.is-center,th.is-center{ text-align:center; }
 /* ============================================================
    Появление при скролле
    ============================================================ */
-.reveal{ opacity:0; transform:translateY(12px); }
+.reveal{ opacity:1; }
+.reveal.is-pending{ opacity:0; transform:translateY(12px); }
 .reveal.is-in{
   opacity:1; transform:none;
   transition:opacity .45s var(--ease), transform .5s var(--ease);
