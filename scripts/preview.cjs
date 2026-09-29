@@ -13,7 +13,7 @@ function createServer(directory=root){
   if(pathname==='/index.html'){res.writeHead(301,{Location:'/'+url.search}).end();return}
   if(pathname.startsWith('/seo/')||pathname.startsWith('/scripts/')||pathname.startsWith('/tests/')||pathname.startsWith('/deploy/')||pathname.split('/').some(p=>p.startsWith('.'))){res.writeHead(404).end('Not found');return}
   const lang=url.searchParams.get('lang');
-  const file=pathname==='/'?(lang==='uz'||lang==='en'?'seo/'+lang+'.html':'index.html'):pathname.slice(1);
+  const file=pathname==='/'?(lang==='uz'||lang==='en'?'seo/'+lang+'.html':'index.html'):(pathname.endsWith('/')?pathname.slice(1)+'index.html':pathname.slice(1));
   const target=path.resolve(directory,file);
   if(!target.startsWith(path.resolve(directory)+path.sep)){res.writeHead(404).end();return}
   fs.readFile(target,(error,data)=>{

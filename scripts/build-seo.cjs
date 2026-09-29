@@ -43,7 +43,7 @@ function render(lang) {
   for (const [key, value] of Object.entries({'data-tg-handle':'@'+config.telegram,'data-phone':config.phoneDisplay,'data-email':config.email,'data-address':config[{ru:'addressRu',uz:'addressUz',en:'addressEn'}[lang]]})) {
     html = html.replace(new RegExp('(<[a-z]+[^>]*\\b'+key+'[^>]*>)[^<]*(</[a-z]+>)','g'), (_,start,end)=>start+escape(value)+end);
   }
-  for (const [key, value] of Object.entries({'data-tg-link':'https://t.me/'+config.telegram,'data-wa-link':'https://wa.me/'+config.whatsapp,'data-mail-link':'mailto:'+config.email,'data-phone-link':'tel:+'+String(config.phoneDisplay).replace(/\D/g,'')})) {
+  for (const [key, value] of Object.entries({'data-tg-link':'https://t.me/'+config.telegram,'data-wa-link':'https://wa.me/'+config.whatsapp,'data-mail-link':'mailto:'+config.email,'data-phone-link':'tel:+'+String(config.phoneDisplay).replace(/\D/g,''),'data-privacy-link':'/privacy/?lang='+lang})) {
     html=html.replace(new RegExp('<a [^>]*\\b'+key+'[^>]*>','g'), tag=>attribute(tag,'href',value));
   }
   const canonical = 'https://yatogo.ru/'+(lang==='ru'?'':'?lang='+lang);
