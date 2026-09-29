@@ -100,6 +100,11 @@
     $$('[data-address]').forEach(function (el) { el.textContent = CFG[key] || ''; });
   }
 
+  function applyPrivacyLinks() {
+    var href = '/privacy/?lang=' + lang;
+    $$('[data-privacy-link]').forEach(function (el) { el.href = href; });
+  }
+
   /* ──────────────────────────────────────────────────────────
      Перевод страницы
      ────────────────────────────────────────────────────────── */
@@ -145,6 +150,7 @@
     });
 
     applyAddress();
+    applyPrivacyLinks();
     renderReviews();
     renderQuiz();
   }

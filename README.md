@@ -44,9 +44,9 @@ an external screenshot/report folder. It stubs messaging and makes no real submi
 
 The owner confirmed the existing reviews are real on 2026-09-28; they are preserved.
 The individual entrepreneur service is separate from the foreign-owned LLC in the table.
-The actual email, full office address, legal entity details and privacy policy still
-need confirmation before adding legal pages or LocalBusiness data. Current contacts
-are preserved, not fabricated. Existing tax rates, minimum capital, office-area and
+The owner supplied the legal operator details, contact email and registered address.
+The privacy policy is available at `/privacy/` in Russian, Uzbek and English. Existing
+tax rates, minimum capital, office-area and
 bank-presence statements have not been legally revalidated by these technical changes.
 Do not treat the SEO patch as a legal review.
 

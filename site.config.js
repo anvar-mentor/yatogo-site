@@ -10,10 +10,10 @@ window.SITE_CONFIG = {
   telegram: 'anwaryul',                 // t.me/anwaryul
   whatsapp: '998502259898',             // wa.me/998502259898
   phoneDisplay: '+998 50 225 98 98',
-  email: 'info@yatogo.ru',              // TODO: заменить на реальную почту
-  addressRu: 'г. Ташкент',              // TODO: улица и офис
-  addressUz: 'Toshkent shahri',         // TODO
-  addressEn: 'Tashkent, Uzbekistan',    // TODO
+  email: 'info.yatogo@gmail.com',
+  addressRu: "Xorazm viloyati, Urganch shahar, Umid MFY, Gurlan ko'chasi, 9/1-uy, 36-xonadon",
+  addressUz: "Xorazm viloyati, Urganch shahar, Umid MFY, Gurlan ko'chasi, 9/1-uy, 36-xonadon",
+  addressEn: "Xorazm viloyati, Urganch shahar, Umid MFY, Gurlan ko'chasi, 9/1-uy, 36-xonadon",
 
   // ─── Форма заявки ─────────────────────────────────────────────────────
   // Заглушка под бота. Пока leadEndpoint пустой, форма собирает ответы
