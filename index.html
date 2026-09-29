@@ -32,8 +32,31 @@
 <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css?v=252388ea5c12">
 <link rel="stylesheet" href="assets/css/style.css?v=99923a2886c2">
+<!-- Yandex.Metrika counter -->
+<script>
+(function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j=0;j<document.scripts.length;j++) {
+        if (document.scripts[j].src===r) { return; }
+    }
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=113132820','ym');
+ym(113132820,'init',{
+    ssr:true,
+    webvisor:true,
+    clickmap:true,
+    ecommerce:"dataLayer",
+    referrer:document.referrer,
+    url:location.href,
+    accurateTrackBounce:true,
+    trackLinks:true
+});
+</script>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
+<noscript><div><img src="https://mc.yandex.ru/watch/113132820" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
 <noscript>
   <nav class="nojs-nav" aria-label="Language / Язык / Til">
@@ -127,7 +150,7 @@
         </div>
       </div>
 
-      <a class="btn btn--primary header__cta" href="#contact" data-i18n="nav.cta">Оставить заявку</a>
+      <a class="btn btn--primary header__cta" href="#contact" data-metrika-goal="cta_apply_click" data-i18n="nav.cta">Оставить заявку</a>
 
       <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Меню" data-i18n-attr="aria-label:nav.menu">
         <span></span><span></span><span></span>
@@ -150,7 +173,7 @@
     <a href="#faq"      data-i18n="nav.faq">FAQ</a>
     <a href="#contact"  data-i18n="nav.contact">Контакты</a>
     <div class="mobile-nav__cta">
-      <a class="btn btn--primary btn--block" href="#contact" data-i18n="nav.cta">Оставить заявку</a>
+      <a class="btn btn--primary btn--block" href="#contact" data-metrika-goal="cta_apply_click" data-i18n="nav.cta">Оставить заявку</a>
       <a class="btn btn--tg btn--block" data-tg-link href="https://t.me/anwaryul" rel="noopener">
         <svg aria-hidden="true"><use href="#i-tg"></use></svg>Telegram
       </a>
@@ -182,7 +205,7 @@
       <h1 data-i18n="hero.h1">Регистрация бизнеса в Узбекистане под ключ</h1>
       <p class="hero__sub" data-i18n="hero.sub">Берём на себя весь процесс: от выбора правовой формы до открытия расчётного счёта. Вы сосредоточены на развитии бизнеса — мы на документах, налогах и бухгалтерии.</p>
       <div class="hero__cta">
-        <a class="btn btn--primary btn--lg" href="#contact" data-i18n="hero.cta1">Оставить заявку</a>
+        <a class="btn btn--primary btn--lg" href="#contact" data-metrika-goal="cta_apply_click" data-i18n="hero.cta1">Оставить заявку</a>
         <a class="btn btn--ghost btn--lg" data-tg-link href="https://t.me/anwaryul" rel="noopener">
           <svg aria-hidden="true"><use href="#i-tg"></use></svg>
           <span data-i18n="hero.cta2">Написать в Telegram</span>
@@ -762,17 +785,17 @@
       </div>
 
       <noscript><p class="contact__lead" data-i18n="form.nojs">Для отправки формы нужен JavaScript. Вы также можете связаться с нами в Telegram или WhatsApp по ссылкам рядом.</p></noscript>
-      <form class="form reveal" id="leadForm" novalidate>
+      <form class="form reveal ym-hide-content ym-disable-submit" id="leadForm" novalidate>
         <div class="form__grid">
           <div class="field">
             <label for="f-name"><span data-i18n="form.name.label">Имя</span> <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required
+            <input id="f-name" class="ym-disable-keys" name="name" type="text" autocomplete="name" required
                    data-i18n-attr="placeholder:form.name.ph" aria-describedby="e-name" placeholder="Как к вам обращаться">
             <p class="field__error" id="e-name" role="alert"></p>
           </div>
           <div class="field">
             <label for="f-phone"><span data-i18n="form.phone.label">Телефон или Telegram</span> <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-phone" name="contact" type="text" autocomplete="tel" required
+            <input id="f-phone" class="ym-disable-keys" name="contact" type="text" autocomplete="tel" required
                    data-i18n-attr="placeholder:form.phone.ph" aria-describedby="e-phone" placeholder="+998 90 000 00 00 или @username">
             <p class="field__error" id="e-phone" role="alert"></p>
           </div>
@@ -800,7 +823,7 @@
           </div>
           <div class="field field--full">
             <label for="f-comment" data-i18n="form.comment.label">Комментарий</label>
-            <textarea id="f-comment" name="comment" rows="4" data-i18n-attr="placeholder:form.comment.ph" placeholder="Вид деятельности, гражданство учредителей, желаемые сроки"></textarea>
+            <textarea id="f-comment" class="ym-disable-keys" name="comment" rows="4" data-i18n-attr="placeholder:form.comment.ph" placeholder="Вид деятельности, гражданство учредителей, желаемые сроки"></textarea>
           </div>
         </div>
 
@@ -846,7 +869,7 @@
         <h2 class="footer__heading" data-i18n="footer.contacts">Контакты</h2>
         <div class="footer__links">
           <a data-tg-link href="https://t.me/anwaryul" rel="noopener"><span data-tg-handle>@anwaryul</span></a>
-          <a data-wa-link href="https://wa.me/998502259898" rel="noopener"><span data-phone>+998 50 225 98 98</span></a>
+          <a data-phone-link href="tel:+998502259898"><span data-phone>+998 50 225 98 98</span></a>
           <a data-mail-link href="mailto:info@yatogo.ru"><span data-email>info@yatogo.ru</span></a>
           <span style="color:var(--muted)" data-address>г. Ташкент</span>
         </div>
@@ -870,7 +893,7 @@
 
 <!-- Нижняя панель на телефоне: заменяет плавающие кнопки, не закрывает текст -->
 <nav class="mbar" aria-label="Contacts">
-  <a class="mbar__btn mbar__btn--cta" href="#contact"><svg aria-hidden="true"><use href="#i-doc"></use></svg><span data-i18n="nav.cta">Оставить заявку</span></a>
+  <a class="mbar__btn mbar__btn--cta" href="#contact" data-metrika-goal="cta_apply_click"><svg aria-hidden="true"><use href="#i-doc"></use></svg><span data-i18n="nav.cta">Оставить заявку</span></a>
   <a class="mbar__btn mbar__btn--tg" data-tg-link href="https://t.me/anwaryul" rel="noopener"><svg aria-hidden="true"><use href="#i-tg"></use></svg><span>Telegram</span></a>
   <a class="mbar__btn mbar__btn--wa" data-wa-link href="https://wa.me/998502259898" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"></use></svg><span>WhatsApp</span></a>
 </nav>
@@ -878,6 +901,6 @@
 <script defer src="site.config.js?v=aea526b61cf5"></script>
 <script defer src="assets/js/i18n.js?v=cda28f33e4ba"></script>
 <script defer src="assets/js/reviews.js?v=da36d63d8ae0"></script>
-<script defer src="assets/js/app.js?v=e69928fb9b37"></script>
+<script defer src="assets/js/app.js?v=99fcf334c022"></script>
 </body>
 </html>

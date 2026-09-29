@@ -10,6 +10,8 @@ async function run(){
  const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
  const base='http://127.0.0.1:'+server.address().port;
  const browser=await chromium.launch({channel:process.env.BROWSER_CHANNEL||'msedge',headless:true});
+  const newContext = browser.newContext.bind(browser);
+  browser.newContext = async options => {const c = await newContext(options); await c.route(/https:\/\//, r => r.fulfill({status:200,contentType:'application/javascript',body:''})); return c;};
  const results=[];
  try{
   for(const width of [320,390,768,1440])for(const lang of ['ru','uz','en']){
