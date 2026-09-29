@@ -9,6 +9,20 @@
   var LANGS = ['ru', 'uz', 'en'];
   var lang  = 'ru';
 
+  // Analytics failure must never interrupt navigation or form handling.
+  function metrika(method, value) {
+    if (typeof window.ym !== 'function') return;
+    try { window.ym(113132820, method, value); } catch (e) { /* blocked analytics */ }
+  }
+
+  function initMetrikaGoals() {
+    document.addEventListener('click', function (e) {
+      if (!e.isTrusted || e.button !== 0) return;
+      var cta = e.target.closest('[data-metrika-goal="cta_apply_click"]');
+      if (cta) metrika('reachGoal', 'cta_apply_click');
+    });
+  }
+
   function t(key) {
     var d = DICT[lang] || DICT.ru || {};
     return Object.prototype.hasOwnProperty.call(d, key) ? d[key] : key;
@@ -76,6 +90,8 @@
     $$('[data-wa-link]').forEach(function (el) { el.href = 'https://wa.me/' + waDigits; el.target = '_blank'; });
     $$('[data-mail-link]').forEach(function (el) { el.href = 'mailto:' + (CFG.email || ''); });
 
+    $$('[data-phone-link]').forEach(function (el) { el.href = 'tel:+' + String(CFG.phoneDisplay || '').replace(/\D/g, ''); });
+
     var y = $('#year'); if (y) y.textContent = String(new Date().getFullYear());
   }
 
@@ -135,8 +151,12 @@
 
   function setLang(next, updateUrl) {
     if (LANGS.indexOf(next) === -1) return;
+    var changed = lang !== next;
     lang = next;
     translate();
+    // A language change replaces content without a document navigation.
+    // Only the known language URL is sent; no form data or arbitrary query values.
+    if (changed) metrika('hit', 'https://yatogo.ru/' + (next === 'ru' ? '' : '?lang=' + next));
     if (updateUrl === false) return;
     try {
       var url = new URL(window.location.href);
@@ -268,6 +288,8 @@
       link.addEventListener('click', function () { $('#f-service').value = 'ip'; });
     });
     var statusEl = $('#formStatus');
+    var submitting = false;
+    var submitButton = $('.form__submit', form);
 
     function setStatus(key, state) {
       if (!statusEl) return;
@@ -296,6 +318,7 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (submitting) return;
 
       var data = {
         name:    $('#f-name').value.trim(),
@@ -332,6 +355,8 @@
         return;
       }
 
+      submitting = true;
+      submitButton.disabled = true;
       form.classList.add('is-busy');
       setStatus('form.status.pending', 'pending');
 
@@ -342,6 +367,7 @@
       })
         .then(function (res) {
           if (!res.ok) throw new Error('HTTP ' + res.status);
+          // No lead_success: HTTP 2xx alone does not confirm CRM acceptance.
           setStatus('form.status.ok', 'ok');
           form.reset();
         })
@@ -349,6 +375,8 @@
           setStatus('form.status.error', 'error');
         })
         .then(function () {
+          submitting = false;
+          submitButton.disabled = false;
           form.classList.remove('is-busy');
         });
     });
@@ -847,6 +875,7 @@
     lang = detectLang();
     setLang(lang, false);
     window.addEventListener('popstate', function () { setLang(detectLang(), false); });
+    initMetrikaGoals();
     initHeader();
     initReveal();
     initTracker();
