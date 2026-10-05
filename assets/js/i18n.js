@@ -186,6 +186,7 @@ ru: {
 
   'nav.reviews': 'Отзывы',
   'nav.faq': 'FAQ',
+  'nav.blog': 'Блог',
   'quiz.kicker': 'Подбор за 30 секунд',
   'quiz.h3': 'Какой тариф вам подойдёт?',
   'quiz.sub': 'Ответьте на 3 вопроса — подскажем формат и срок.',
@@ -521,6 +522,7 @@ uz: {
 
   'nav.reviews': 'Fikrlar',
   'nav.faq': 'FAQ',
+  'nav.blog': 'Blog',
   'quiz.kicker': '30 soniyada tanlash',
   'quiz.h3': 'Sizga qaysi tarif mos keladi?',
   'quiz.sub': '3 ta savolga javob bering — format va muddatni aytib beramiz.',
@@ -856,6 +858,7 @@ en: {
 
   'nav.reviews': 'Reviews',
   'nav.faq': 'FAQ',
+  'nav.blog': 'Blog',
   'quiz.kicker': 'Pick in 30 seconds',
   'quiz.h3': 'Which package suits you?',
   'quiz.sub': 'Answer 3 questions and we will suggest the format and timeline.',
