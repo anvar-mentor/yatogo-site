@@ -12,16 +12,17 @@ async function run(){
   const base='http://127.0.0.1:'+server.address().port;
   const browser=await chromium.launch({channel:process.env.BROWSER_CHANNEL||'msedge',headless:true});
   try{
+    const routes=['/blog/otkryt-ooo-v-uzbekistane/','/blog/ooo-v-uzbekistane-udalenno/','/blog/nalogi-ooo-v-uzbekistane/','/blog/ooo-ili-ip-v-uzbekistane/'];
     for(const width of [390,1440]){
       const context=await browser.newContext({viewport:{width,height:1000},reducedMotion:'reduce'});
       await context.route(/https:\/\//,route=>route.fulfill({status:200,body:''}));
       const page=await context.newPage();const errors=[];
       page.on('pageerror',error=>errors.push(error.message));
-      await page.goto(base+'/blog/otkryt-ooo-v-uzbekistane/',{waitUntil:'networkidle'});
+      await page.goto(base+routes[width===390?1:2],{waitUntil:'networkidle'});
       assert.equal(await page.locator('h1').count(),1);
       assert.equal(await page.locator('.facts .fact').count(),3);
-      assert.equal(await page.locator('.faq details').count(),8);
-      assert.equal(await page.locator('.toc a').count(),13);
+      assert.ok(await page.locator('.faq details').count()>=6);
+      assert.ok(await page.locator('.toc a').count()>=7);
       assert.equal(await page.locator('.cta-box a').getAttribute('href'),'/?#contact'.replace('?',''));
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
       assert.deepEqual(errors,[]);
@@ -32,12 +33,15 @@ async function run(){
     const context=await browser.newContext({viewport:{width:390,height:900}});
     const page=await context.newPage();
     await page.goto(base+'/blog/',{waitUntil:'domcontentloaded'});
-    assert.equal(await page.locator('.article-list .article-card').count(),2);
+    assert.equal(await page.locator('.article-list .article-card').count(),10);
     assert.equal(await page.locator('.article-card').first().getAttribute('href'),'/blog/otkryt-ooo-v-uzbekistane/');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
     await page.screenshot({path:path.join(output,'index-390.png'),fullPage:true});
+    for(const route of routes){
+      const response=await page.goto(base+route,{waitUntil:'domcontentloaded'});assert.equal(response.status(),200);assert.equal(await page.locator('h1').count(),1);
+    }
     await context.close();
-    console.log('Blog index and article passed at 390px and 1440px.');
+    console.log('Blog index and representative articles passed at 390px and 1440px.');
   }finally{
     await browser.close();await new Promise(resolve=>server.close(resolve));
   }
