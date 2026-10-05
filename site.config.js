@@ -7,9 +7,9 @@ window.SITE_CONFIG = {
   brandName: 'YATOGO',
 
   // ─── Контакты в кнопках ───────────────────────────────────────────────
-  telegram: 'anwaryul',                 // t.me/anwaryul
-  whatsapp: '998502259898',             // wa.me/998502259898
-  phoneDisplay: '+998 50 225 98 98',
+  telegram: 'infoyatogo',               // t.me/infoyatogo
+  whatsapp: '998501113939',             // wa.me/998501113939
+  phoneDisplay: '+998 50 111 39 39',
   email: 'info.yatogo@gmail.com',
   addressRu: "Xorazm viloyati, Urganch shahar, Umid MFY, Gurlan ko'chasi, 9/1-uy, 36-xonadon",
   addressUz: "Xorazm viloyati, Urganch shahar, Umid MFY, Gurlan ko'chasi, 9/1-uy, 36-xonadon",
@@ -17,7 +17,7 @@ window.SITE_CONFIG = {
 
   // ─── Форма заявки ─────────────────────────────────────────────────────
   // Заглушка под бота. Пока leadEndpoint пустой, форма собирает ответы
-  // и открывает ваш Telegram (@anwaryul) с уже готовым текстом заявки —
+  // и открывает ваш Telegram (@infoyatogo) с уже готовым текстом заявки —
   // клиенту остаётся нажать «отправить».
   // Когда поднимете функцию (см. api/lead.js и README.md) — впишите '/api/lead',
   // и заявка будет приходить боту сама, без перехода в мессенджер.

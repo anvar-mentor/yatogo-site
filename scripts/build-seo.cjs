@@ -49,6 +49,9 @@ function render(lang) {
   const canonical = 'https://yatogo.ru/'+(lang==='ru'?'':'?lang='+lang);
   html=html.replace(/<link rel="canonical"[^>]*>/, tag=>attribute(tag,'href',canonical));
   html=html.replace(/<meta property="og:url"[^>]*>/, tag=>attribute(tag,'content',canonical));
+  const phone='+'+String(config.phoneDisplay).replace(/\D/g,'');
+  const siteSchema={'@context':'https://schema.org','@graph':[{'@type':'Organization','@id':'https://yatogo.ru/#organization',name:config.brandName,url:'https://yatogo.ru/',logo:'https://yatogo.ru/assets/logo-mark.svg',telephone:phone,email:config.email,sameAs:['https://t.me/'+config.telegram,'https://wa.me/'+config.whatsapp]},{'@type':'WebSite','@id':'https://yatogo.ru/#website',name:config.brandName,url:'https://yatogo.ru/',inLanguage:['ru','uz','en'],publisher:{'@id':'https://yatogo.ru/#organization'}}]};
+  html=html.replace(/(<script type="application\/ld\+json" id="site-schema">)[\s\S]*?(<\/script>)/,(_,start,end)=>start+JSON.stringify(siteSchema).replace(/</g,'\\u003c')+end);
   html=html.replace(/(<script type="application\/ld\+json" id="page-schema">)[\s\S]*?(<\/script>)/, (_,start,end)=>start+JSON.stringify({'@context':'https://schema.org','@type':'WebPage','@id':canonical+'#webpage',url:canonical,name:t('meta.title'),description:t('meta.desc'),inLanguage:lang,isPartOf:{'@id':'https://yatogo.ru/#website'},about:{'@id':'https://yatogo.ru/#organization'}}).replace(/</g,'\\u003c')+end);
   const colors=['#0B7A5B','#1F6FB2','#7A4FB5','#B5613A','#2E8C8C','#5B6B7A','#A34A6B'];
   let rowIndex=0;

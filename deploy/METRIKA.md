@@ -33,7 +33,7 @@ form data. The document title is updated before the hit.
 
 There is NO lead_success call, and NO telegram_click, whatsapp_click or phone_click.
 Ordinary Telegram/WhatsApp links retain their supported URLs and use built-in
-Metrika goals. The footer phone link now uses tel:+998502259898, derived from
+Metrika goals. The footer phone link now uses tel:+998501113939, derived from
 phoneDisplay at build time and runtime. Other WhatsApp links remain unchanged.
 
 ## Form audit and deliberately unfinished lead tracking
