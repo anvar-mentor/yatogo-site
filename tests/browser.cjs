@@ -34,7 +34,7 @@ async function run(){
    await page.locator('[data-service="ip"]').click();assert.equal(await page.locator('#f-service').inputValue(),'ip');
    await page.locator('.form__submit').click();assert.equal(await page.locator('#f-name').getAttribute('aria-invalid'),'true');
    await page.locator('#f-name').fill('SEO TEST');await page.locator('#f-phone').focus();await page.locator('#f-phone').fill('@seo_test');await page.locator('#f-consent').check();await page.locator('.form__submit').click();
-   const message=await page.evaluate(()=>window.__messageUrl);assert.ok(message.startsWith('https://t.me/infoyatogo?text='));assert.ok(decodeURIComponent(message).includes('SEO TEST'));
+   const message=await page.evaluate(()=>window.__messageUrl);assert.ok(message.startsWith('https://t.me/anwaryul?text='));assert.ok(decodeURIComponent(message).includes('SEO TEST'));
    await page.locator('[data-plan="Premium"]').first().click();assert.equal(await page.locator('#f-plan').inputValue(),'Premium');
    await page.locator('#faq details').nth(1).locator('summary').click();assert.equal(await page.locator('#faq details').nth(1).getAttribute('open'),'');
    for(let i=0;i<3;i++)await page.locator('.quiz__opt').first().click();assert.equal(await page.locator('[data-quiz="choose"]').count(),1);
