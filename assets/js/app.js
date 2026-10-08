@@ -358,7 +358,7 @@
      ────────────────────────────────────────────────────────── */
   function buildMessage(data) {
     var lines = [
-      t('form.msg.title') + ' — ' + (CFG.brandName || 'YATOGO'),
+      t('form.msg.title'),
       '',
       t('form.msg.name') + ': ' + data.name,
       t('form.msg.contact') + ': ' + data.contact
