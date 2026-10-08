@@ -89,12 +89,17 @@
     $$('[data-email]').forEach(function (el) { el.textContent = CFG.email || ''; });
 
     $$('[data-tg-link]').forEach(function (el) { el.href = 'https://t.me/' + tgHandle; el.target = '_blank'; });
-    $$('[data-wa-link]').forEach(function (el) { el.href = 'https://wa.me/' + waDigits; el.target = '_blank'; });
+    applyWhatsAppLinks();
     $$('[data-mail-link]').forEach(function (el) { el.href = 'mailto:' + (CFG.email || ''); });
 
     $$('[data-phone-link]').forEach(function (el) { el.href = 'tel:+' + String(CFG.phoneDisplay || '').replace(/\D/g, ''); });
 
     var y = $('#year'); if (y) y.textContent = String(new Date().getFullYear());
+  }
+
+  function applyWhatsAppLinks() {
+    var href = 'https://wa.me/' + waDigits + '?text=' + encodeURIComponent(t('contact.waGreeting'));
+    $$('[data-wa-link]').forEach(function (el) { el.href = href; el.target = '_blank'; });
   }
 
   function applyAddress() {
@@ -153,6 +158,7 @@
 
     applyAddress();
     applyPrivacyLinks();
+    applyWhatsAppLinks();
     renderReviews();
 
     renderLaunchBuilder(false);
