@@ -33,7 +33,7 @@ async function run(){
     const context=await browser.newContext({viewport:{width:390,height:900}});
     const page=await context.newPage();
     await page.goto(base+'/blog/',{waitUntil:'domcontentloaded'});
-    assert.equal(await page.locator('.article-list .article-card').count(),10);
+    assert.equal(await page.locator('.article-list .article-card').count(),11);
     assert.equal(await page.locator('.article-card').first().getAttribute('href'),'/blog/otkryt-ooo-v-uzbekistane/');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
     await page.screenshot({path:path.join(output,'index-390.png'),fullPage:true});
