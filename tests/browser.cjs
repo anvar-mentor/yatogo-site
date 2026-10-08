@@ -37,7 +37,7 @@ async function run(){
    const message=await page.evaluate(()=>window.__messageUrl);assert.ok(message.startsWith('https://t.me/infoyatogo?text='));assert.ok(decodeURIComponent(message).includes('SEO TEST'));
    await page.locator('[data-plan="Premium"]').first().click();assert.equal(await page.locator('#f-plan').inputValue(),'Premium');await page.locator('[data-close-plan]').click();
    await page.locator('#faq details').nth(1).locator('summary').click();assert.equal(await page.locator('#faq details').nth(1).getAttribute('open'),'');
-   for(let i=0;i<3;i++)await page.locator('.quiz__opt').first().click();assert.equal(await page.locator('[data-quiz="choose"]').count(),1);
+   assert.equal(await page.locator("#quiz").count(),0);
    const max=Math.min(30000,await page.evaluate(()=>document.body.scrollHeight));for(let y=0;y<max;y+=800){await page.evaluate(y=>scrollTo(0,y),y);await page.waitForTimeout(20)}
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    if(width===390&&lang==='ru')await page.screenshot({path:path.join(output,'ru-390-full.png'),fullPage:true});

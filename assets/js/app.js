@@ -154,7 +154,7 @@
     applyAddress();
     applyPrivacyLinks();
     renderReviews();
-    renderQuiz();
+
     renderLaunchBuilder(false);
   }
 
@@ -665,90 +665,7 @@
   }
 
   /* ──────────────────────────────────────────────────────────
-     Подбор тарифа за 3 вопроса
-     ────────────────────────────────────────────────────────── */
-  var QUIZ = [
-    { q: 'quiz.q1', opts: ['quiz.q1.a', 'quiz.q1.b'] },               // учредители: один / несколько
-    { q: 'quiz.q2', opts: ['quiz.q2.a', 'quiz.q2.b'] },               // иностранный директор с разрешением
-    { q: 'quiz.q3', opts: ['quiz.q3.a', 'quiz.q3.b', 'quiz.q3.c'] }   // срочность
-  ];
-  var PLAN_DAYS = { Classic: 10, Business: 5, Premium: 2 };
-  var quizAnswers = [];
-
-  // Правила взяты из таблицы тарифов: разрешение на работу и срок 2 дня —
-  // только Premium; больше одного учредителя и срок 5 дней — от Business.
-  function pickPlan(a) {
-    if (a[1] === 1) return { plan: 'Premium',  why: 'quiz.why.premium.permit' };
-    if (a[2] === 2) return { plan: 'Premium',  why: 'quiz.why.premium.fast' };
-    if (a[0] === 1 || a[2] === 1) return { plan: 'Business', why: 'quiz.why.business' };
-    return { plan: 'Classic', why: 'quiz.why.classic' };
-  }
-
-  function renderQuiz() {
-    var body = $('#quizBody');
-    if (!body) return;
-    $('#quiz').hidden = false;
-    var step = quizAnswers.length;
-    var html;
-    if (step < QUIZ.length) {
-      var item = QUIZ[step], dots = '';
-      for (var i = 0; i < QUIZ.length; i++) dots += '<span class="' + (i <= step ? 'on' : '') + '"></span>';
-      html = '<div class="quiz__panel">'
-        + '<div class="quiz__meta"><span>' + esc(t('quiz.step')) + ' ' + (step + 1) + ' ' + esc(t('quiz.of')) + ' ' + QUIZ.length + '</span>'
-        + '<span class="quiz__dots" aria-hidden="true">' + dots + '</span></div>'
-        + '<p class="quiz__q">' + esc(t(item.q)) + '</p>'
-        + '<div class="quiz__opts">'
-        + item.opts.map(function (k, i) { return '<button type="button" class="quiz__opt" data-answer="' + i + '">' + esc(t(k)) + '</button>'; }).join('')
-        + '</div>'
-        + (step > 0 ? '<button type="button" class="quiz__back" data-quiz="back">← ' + esc(t('quiz.back')) + '</button>' : '')
-        + '</div>';
-    } else {
-      var r = pickPlan(quizAnswers);
-      html = '<div class="quiz__panel quiz__result">'
-        + '<span class="quiz__label">' + esc(t('quiz.result')) + '</span>'
-        + '<div class="quiz__plan"><span class="quiz__plan-name">' + r.plan + '</span>'
-        + '<span class="quiz__plan-days"><b>' + esc(t('plans.days' + PLAN_DAYS[r.plan])) + '</b> ' + esc(t('quiz.days')) + '</span></div>'
-        + '<p class="quiz__why">' + esc(t(r.why)) + '</p>'
-        + '<div class="quiz__actions">'
-        + '<button type="button" class="btn btn--primary" data-quiz="choose" data-plan-pick="' + r.plan + '">' + esc(t('quiz.choose')) + '</button>'
-        + '<button type="button" class="btn btn--ghost" data-quiz="restart">' + esc(t('quiz.restart')) + '</button>'
-        + '</div></div>';
-    }
-    body.innerHTML = html;
-    // подсветить рекомендованную карточку тарифа
-    $$('.plan').forEach(function (card) {
-      var btn = $('[data-plan]', card);
-      var picked = step >= QUIZ.length && btn && btn.getAttribute('data-plan') === pickPlan(quizAnswers).plan;
-      card.classList.toggle('is-picked', !!picked);
-    });
-  }
-
-  function initQuiz() {
-    var body = $('#quizBody');
-    if (!body) return;
-    body.addEventListener('click', function (e) {
-      var opt = e.target.closest('[data-answer]');
-      var act = e.target.closest('[data-quiz]');
-      if (opt) {
-        quizAnswers.push(parseInt(opt.getAttribute('data-answer'), 10));
-        renderQuiz();
-        var first = $('.quiz__opt, [data-quiz="choose"]', body);
-        if (first && e.detail === 0) first.focus();   // для клавиатуры — фокус на следующий шаг
-        return;
-      }
-      if (!act) return;
-      var a = act.getAttribute('data-quiz');
-      if (a === 'back')    { quizAnswers.pop(); renderQuiz(); }
-      if (a === 'restart') { quizAnswers = []; renderQuiz(); }
-      if (a === 'choose') {
-        showPlanForm(act.getAttribute('data-plan-pick'));
-      }
-    });
-    renderQuiz();
-  }
-
-  /* ──────────────────────────────────────────────────────────
-     Меню: подсвечиваем раздел, который сейчас на экране
+     Подсветка текущего раздела в меню
      ────────────────────────────────────────────────────────── */
   function initScrollSpy() {
     var links = $$('.nav a[href^="#"], .mobile-nav a[href^="#"]');
@@ -858,8 +775,9 @@
   var launchOptionCounts = [4, 2, 4, 3];
   var lastLaunchComment = '';
   function launchPlan() {
+    if (launchAnswers[0] === 3 || launchAnswers[2] === 3 || launchAnswers[3] === 2) return 'Consultation';
     if (launchAnswers[2] === 2) return 'Premium';
-    if (launchAnswers[1] === 1 || launchAnswers[2] === 1 || launchAnswers[2] === 3) return 'Business';
+    if (launchAnswers[1] === 1 || launchAnswers[2] === 1) return 'Business';
     return 'Classic';
   }
   function launchEscape(value) {
@@ -889,6 +807,14 @@
     } else {
       var plan = launchPlan();
       var days = {Classic:'10',Business:'5',Premium:'2'}[plan];
+      if (plan === 'Consultation') {
+        content = '<div class="launch-result launch-consultation"><p>' + esc(t('launch.consultIntro')) + '</p>'
+          + '<h3 id="launchQuestion" tabindex="-1">' + esc(t('launch.consultTitle')) + '</h3>'
+          + '<div class="launch-price">0 $</div><p>' + esc(t('launch.consultText')) + '</p>'
+          + '<p class="launch-small">' + esc(t('launch.consultNote')) + '</p>'
+          + '<button type="button" class="btn btn--primary" data-launch-discuss>' + esc(t('launch.consultCta')) + '</button>'
+          + '<button type="button" class="launch-restart" data-launch-restart>' + esc(t('launch.restart')) + '</button></div>';
+      } else {
       content = '<div class="launch-result"><p>' + esc(t('launch.result')) + '</p><h3 id="launchQuestion" tabindex="-1">' + plan + '</h3>'
         + '<div class="launch-price">' + {Classic:'650',Business:'900',Premium:'1 150'}[plan] + ' $</div>'
         + '<div class="launch-days">' + esc(t('plans.days' + days)) + ' ' + esc(t('plans.daysLabel')) + '</div>'
@@ -896,6 +822,7 @@
         + (launchAnswers[3] !== 1 ? '<p class="launch-small">' + esc(t('launch.remote')) + '</p>' : '')
         + '<button type="button" class="btn btn--primary" data-launch-discuss>' + esc(t('launch.discuss')) + '</button>'
         + '<button type="button" class="launch-restart" data-launch-restart>' + esc(t('launch.restart')) + '</button></div>';
+      }
     }
     body.innerHTML = content;
     if (focus) $('#launchQuestion').focus({preventScroll:true});
@@ -945,7 +872,6 @@
     initCounters();
     initStepsPath();
     initScrollBg();
-    initQuiz();
     initScrollSpy();
     initTouchReviews();
     initTables();
