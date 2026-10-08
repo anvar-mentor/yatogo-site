@@ -292,6 +292,8 @@ ru: {
   'contact.lead': 'Расскажите о задаче — вернёмся с планом и сроками. Или напишите сразу в мессенджер.',
   'contact.tg.label': 'Telegram',
   'contact.wa.label': 'WhatsApp',
+  'contact.wa.action': 'Написать',
+  'contact.phone.label': 'Телефон',
   'contact.mail.label': 'Электронная почта',
   'contact.addr.label': 'Офис',
 
@@ -628,6 +630,8 @@ uz: {
   'contact.lead': 'Vazifangiz haqida ayting — reja va muddatlar bilan qaytamiz. Yoki to‘g‘ridan-to‘g‘ri messenjerga yozing.',
   'contact.tg.label': 'Telegram',
   'contact.wa.label': 'WhatsApp',
+  'contact.wa.action': 'Yozish',
+  'contact.phone.label': 'Telefon',
   'contact.mail.label': 'Elektron pochta',
   'contact.addr.label': 'Ofis',
 
@@ -964,6 +968,8 @@ en: {
   'contact.lead': 'Tell us about your case and we will come back with a plan and timeline. Or message us directly.',
   'contact.tg.label': 'Telegram',
   'contact.wa.label': 'WhatsApp',
+  'contact.wa.action': 'Message',
+  'contact.phone.label': 'Phone',
   'contact.mail.label': 'Email',
   'contact.addr.label': 'Office',
 
