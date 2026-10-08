@@ -48,7 +48,7 @@ test('sitemap and main pages expose the blog and current contacts',()=>{
   for(const file of ['index.html','seo/uz.html','seo/en.html']){
     const html=read(file);
     assert.ok(html.includes('href="/blog/"'));
-    assert.ok(html.includes('https://t.me/anwaryul'));
+    assert.ok(html.includes('https://t.me/infoyatogo'));
     assert.ok(html.includes('https://wa.me/998501113939'));
     assert.ok(html.includes('tel:+998501113939'));
     assert.ok(html.includes('info.yatogo@gmail.com'));

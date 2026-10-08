@@ -34,7 +34,7 @@ async function run() {
       assert.equal(await p.locator('[data-metrika-goal]').count(), 4);
       assert.equal(await p.locator('.ym-disable-keys').count(), 3);
       assert.equal(await p.locator('[data-phone-link]').getAttribute('href'), 'tel:+998501113939');
-      assert.equal(await p.locator('[data-tg-link]').evaluateAll(xs => xs.every(x => x.href === 'https://t.me/anwaryul')), true);
+      assert.equal(await p.locator('[data-tg-link]').evaluateAll(xs => xs.every(x => x.href === 'https://t.me/infoyatogo')), true);
       assert.equal(await p.locator('[data-wa-link]').evaluateAll(xs => xs.every(x => x.href === 'https://wa.me/998501113939')), true);
       await p.locator('.header__cta').click();
       await p.locator('.hero__cta [data-metrika-goal]').click();
