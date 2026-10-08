@@ -267,12 +267,49 @@
   var planFormPlaceholder;
   var planFormTrigger;
   var planFormOverflow;
-  function showPlanForm(plan) {
+  var requestContext = 'general';
+  var requestPresentation;
+  var requestPlan = '';
+  function applyRequestContext() {
+    var service = $('#f-service');
+    var plan = $('#f-plan');
+    var serviceField = service.closest('.field');
+    var planField = plan.closest('.field');
+    var fixed = $('#f-service-fixed');
+    var label = $('label', serviceField);
+    serviceField.hidden = requestContext === 'launch';
+    planField.hidden = requestContext === 'ip';
+    service.hidden = requestContext === 'ip';
+    service.disabled = requestContext !== 'general';
+    plan.disabled = requestContext === 'ip';
+    fixed.hidden = requestContext !== 'ip';
+    fixed.value = t('form.service.ipShort');
+    label.htmlFor = requestContext === 'ip' ? 'f-service-fixed' : 'f-service';
+    serviceField.classList.toggle('field--full', requestContext === 'ip');
+    planField.classList.toggle('field--full', requestContext === 'launch');
+    if (requestContext === 'ip') {
+      service.value = 'ip';
+      plan.value = '';
+    } else if (requestContext === 'launch') {
+      service.selectedIndex = requestPlan === 'Consultation' ? service.options.length - 1 : 1;
+      plan.value = requestPlan;
+    }
+  }
+  function showPlanForm(plan, context) {
     var form = $('#leadForm');
     var dialog = $('#planDialog');
     var sel = $('#f-plan');
-    if (sel) sel.value = plan;
     if (!form || !dialog || dialog.open) return;
+    var service = $('#f-service');
+    requestPresentation = { service: service.value, plan: sel.value };
+    requestContext = context || 'general';
+    requestPlan = plan || '';
+    if (requestContext === 'ip' && lastLaunchComment) {
+      $('#f-comment').value = $('#f-comment').value.replace(lastLaunchComment, '').trim();
+      lastLaunchComment = '';
+    }
+    applyRequestContext();
+    if (requestContext === 'general') sel.value = plan || '';
     planFormTrigger = document.activeElement;
     planFormPlaceholder = document.createElement('div');
     planFormPlaceholder.style.height = form.offsetHeight + 'px';
@@ -296,6 +333,14 @@
       dialog.addEventListener('close', function () {
         var form = $('#leadForm');
         if (planFormPlaceholder && form) planFormPlaceholder.replaceWith(form);
+        var previousContext = requestContext;
+        var wasIp = previousContext === 'ip';
+        requestContext = 'general';
+        applyRequestContext();
+        if (requestPresentation && previousContext !== 'general') {
+          $('#f-service').value = requestPresentation.service;
+          if (wasIp) $('#f-plan').value = requestPresentation.plan;
+        }
         document.documentElement.style.overflow = planFormOverflow || '';
         if (planFormTrigger && planFormTrigger.isConnected) planFormTrigger.focus({ preventScroll: true });
       });
@@ -329,7 +374,13 @@
     var form = $('#leadForm');
     if (!form) return;
     $$('[data-service="ip"]').forEach(function (link) {
-      link.addEventListener('click', function () { $('#f-service').value = 'ip'; });
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        showPlanForm('', 'ip');
+      });
+    });
+    form.addEventListener('reset', function () {
+      setTimeout(function () { if (requestContext !== 'general') applyRequestContext(); }, 0);
     });
     var statusEl = $('#formStatus');
     var submitting = false;
@@ -367,8 +418,8 @@
       var data = {
         name:    $('#f-name').value.trim(),
         contact: $('#f-phone').value.trim(),
-        service: $('#f-service').value === 'ip' ? t('form.service.ip') : $('#f-service').value.trim(),
-        plan:    $('#f-plan').value.trim(),
+        service: requestContext === 'ip' || $('#f-service').value === 'ip' ? t('form.service.ip') : $('#f-service').value.trim(),
+        plan:    requestContext === 'ip' ? '' : $('#f-plan').value.trim(),
         comment: $('#f-comment').value.trim(),
         lang:    lang
       };
@@ -853,7 +904,7 @@
           comment.value = (existing ? existing + '\n\n' : '') + summary;
           lastLaunchComment = summary;
         }
-        showPlanForm(launchPlan());
+        showPlanForm(launchPlan(), 'launch');
       }
     });
     renderLaunchBuilder(false);

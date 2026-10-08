@@ -460,28 +460,6 @@ ym(113132820,'init',{
   </div>
 </section>
 
-<!-- ═══════════════ Уставные документы ═══════════════ -->
-<section class="section section--soft">
-  <div class="container">
-    <div class="section__head reveal">
-      <span class="section__kicker" data-i18n="charter.kicker">Ta’sis hujjatlari</span>
-      <h2 data-i18n="charter.h2">To‘plam ta’sischilar soniga bog‘liq</h2>
-    </div>
-    <div class="grid grid--2">
-      <article class="card card--hover reveal">
-        <div class="card__icon"><svg aria-hidden="true"><use href="#i-user"></use></svg></div>
-        <h3 data-i18n="charter.one.title">Yagona ta’sischi</h3>
-        <ul class="card__list"><li data-i18n="charter.one.li1">Ta’sischi qarori</li><li data-i18n="charter.one.li2">Ustav</li></ul>
-      </article>
-      <article class="card card--hover reveal">
-        <div class="card__icon"><svg aria-hidden="true"><use href="#i-support"></use></svg></div>
-        <h3 data-i18n="charter.many.title">Ikki va undan ortiq ta’sischi</h3>
-        <ul class="card__list"><li data-i18n="charter.many.li1">Ta’sischilar umumiy yig‘ilishi bayonnomasi</li><li data-i18n="charter.many.li2">Ta’sis shartnomasi</li><li data-i18n="charter.many.li3">Ustav</li></ul>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════════ Налоги ═══════════════ -->
 <section class="section" id="taxes">
 <div class="container">
@@ -672,9 +650,9 @@ ym(113132820,'init',{
         <li data-i18n="bank.li1">Hisob raqam ochish uchun hujjatlarni tayyorlash</li><li data-i18n="bank.li2">Faoliyat turiga mos bankni tanlash</li>
         <li data-i18n="bank.li3">Hisob raqam ochishda hamrohlik</li><li data-i18n="bank.li4">Masofaviy xizmatni ulash</li>
       </ul>
-      <div style="display:flex;gap:12px;align-items:flex-start;margin-top:22px;padding:16px 18px;background:#FEF6F5;border:1px solid #F5D9D6;border-radius:var(--r-md)">
-        <svg aria-hidden="true" style="width:20px;height:20px;flex:none;color:var(--danger);margin-top:1px"><use href="#i-warn"></use></svg>
-        <p style="font-size:.9rem;color:var(--danger)" data-i18n="bank.warn">Hisob raqamni ishonchnoma asosida ochishga yo‘l qo‘yilmaydi — direktor shaxsan hozir bo‘lishi shart.</p>
+      <div style="display:flex;gap:12px;align-items:flex-start;margin-top:22px;padding:16px 18px;background:var(--accent-soft);border:1px solid var(--border);border-radius:var(--r-md)">
+        <svg aria-hidden="true" style="width:20px;height:20px;flex:none;color:var(--accent);margin-top:1px"><use href="#i-shield"></use></svg>
+        <p style="font-size:.9rem;color:var(--ink-2)" data-i18n="bank.warn">Hisobvaraq bankka kelib ochilganda kompaniya nomidan direktor qatnashadi. Direktor O‘zbekiston fuqarosi bo‘lsa, bank jarayonlarini u bajaradi. Direktor bo‘lmagan 100% ulushga ega xorijiy ta’sischining shaxsan kelishi odatda talab etilmaydi. Ta’sischi va direktorni identifikatsiya qilish talablarini tanlangan bank bilan aniqlashtiramiz.</p>
       </div>
     </article>
   </div>
@@ -998,6 +976,7 @@ ym(113132820,'init',{
               <option data-i18n="form.service.opt5">Buxgalteriya hamrohligi</option>
               <option data-i18n="form.service.opt6">Boshqa / maslahat</option>
             </select>
+            <input id="f-service-fixed" type="text" readonly hidden>
           </div>
           <div class="field">
             <label for="f-plan" data-i18n="form.plan.label">Qiziqtirgan tarif</label>
@@ -1094,8 +1073,8 @@ ym(113132820,'init',{
 </dialog>
 
 <script defer src="site.config.js?v=90e9c4aea957"></script>
-<script defer src="assets/js/i18n.js?v=7c3aeacc8296"></script>
+<script defer src="assets/js/i18n.js?v=65b0b6ffe788"></script>
 <script defer src="assets/js/reviews.js?v=da36d63d8ae0"></script>
-<script defer src="assets/js/app.js?v=1450776cfbd6"></script>
+<script defer src="assets/js/app.js?v=41167a5058e6"></script>
 </body>
 </html>

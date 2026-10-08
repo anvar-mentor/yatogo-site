@@ -31,10 +31,10 @@ async function run(){
    const switched=lang==='en'?'uz':'en';assert.equal(await page.locator('html').getAttribute('lang'),switched);
    const meta=await page.evaluate(()=>({title:document.title,og:document.querySelector('meta[property="og:title"]').content,twitter:document.querySelector('meta[name="twitter:title"]').content,desc:document.querySelector('meta[name="description"]').content,expected:window.I18N[document.documentElement.lang]['meta.desc']}));
    assert.equal(meta.title,meta.og);assert.equal(meta.title,meta.twitter);assert.equal(meta.desc,meta.expected);
-   await page.locator('[data-service="ip"]').click();assert.equal(await page.locator('#f-service').inputValue(),'ip');
+   await page.locator('[data-service="ip"]').click();assert.equal(await page.locator('#f-service').inputValue(),'ip');assert.equal(await page.locator('#planDialog').evaluate(e=>e.open),true);
    await page.locator('.form__submit').click();assert.equal(await page.locator('#f-name').getAttribute('aria-invalid'),'true');
    await page.locator('#f-name').fill('SEO TEST');await page.locator('#f-phone').focus();await page.locator('#f-phone').fill('@seo_test');await page.locator('#f-consent').check();await page.locator('.form__submit').click();
-   const message=await page.evaluate(()=>window.__messageUrl);assert.ok(message.startsWith('https://t.me/infoyatogo?text='));assert.ok(decodeURIComponent(message).includes('SEO TEST'));
+   const message=await page.evaluate(()=>window.__messageUrl);assert.ok(message.startsWith('https://t.me/infoyatogo?text='));assert.ok(decodeURIComponent(message).includes('SEO TEST'));await page.locator('[data-close-plan]').click();
    await page.locator('[data-plan="Premium"]').first().click();assert.equal(await page.locator('#f-plan').inputValue(),'Premium');await page.locator('[data-close-plan]').click();
    await page.locator('#faq details').nth(1).locator('summary').click();assert.equal(await page.locator('#faq details').nth(1).getAttribute('open'),'');
    assert.equal(await page.locator("#quiz").count(),0);
