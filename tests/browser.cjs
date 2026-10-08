@@ -45,7 +45,7 @@ async function run(){
   }
   for(const lang of ['ru','uz','en']){
    const ctx=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:900}}),page=await ctx.newPage();await page.goto(base+'/?lang='+lang);
-   assert.equal(await page.locator('html').getAttribute('lang'),lang);assert.equal(await page.locator('#compareTable tbody tr').count(),17);assert.equal(await page.locator('#faq details').count(),7);assert.equal(await page.locator('.review:not([aria-hidden])').count(),20);
+   assert.equal(await page.locator('html').getAttribute('lang'),lang);assert.equal(await page.locator('#compareTable tbody tr').count(),19);assert.equal(await page.locator('#faq details').count(),7);assert.equal(await page.locator('.review:not([aria-hidden])').count(),20);
    assert.equal(await page.locator('.form__submit').isDisabled(),true);assert.equal(await page.locator('a[href="#"]').count(),0);
    assert.equal(await page.locator('.reveal').evaluateAll(xs=>xs.some(x=>getComputedStyle(x).opacity==='0')),false);
    await ctx.close();results.push({lang,noJS:true,passed:true});

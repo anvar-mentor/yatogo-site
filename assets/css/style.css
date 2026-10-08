@@ -969,3 +969,7 @@ body{
 .quiz .section__kicker{ vertical-align:middle; margin-bottom:14px; }
 .quiz__opt{ background:#fff; }
 @media (prefers-reduced-motion: reduce){ .quiz{ animation:none; } }
+
+/* Package prices and conditions. */
+.plan__price{font-size:36px;font-weight:700;color:var(--ink);margin:16px 0 0;line-height:1.2}
+.plans-conditions{max-width:980px;margin:12px auto 0;text-align:center;color:var(--muted);font-size:.92rem;line-height:1.65}

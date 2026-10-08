@@ -30,7 +30,7 @@ function render(lang) {
   const dict = I18N[lang];
   const t = key => { if (!(key in dict)) throw new Error(lang+': missing '+key); return dict[key]; };
   let html = template;
-  const rows = matrix.map(row => '<tr><th scope="row" class="row-label" data-i18n="'+row[0]+'"></th>'+row.slice(1).map(on => '<td class="is-center"><span class="mark mark--'+(on?'yes':'no')+'" role="img" data-i18n-attr="aria-label:compare.'+(on?'yes':'no')+'"><svg aria-hidden="true"><use href="#i-'+(on?'check':'cross')+'"></use></svg></span></td>').join('')+'</tr>').join('\n');
+  const rows = matrix.map(row => '<tr><th scope="row" class="row-label" data-i18n="'+row[0]+'"></th>'+row.slice(1).map(on => '<td class="is-center"><span class="mark mark--'+(on?'yes':'no')+'" role="img" data-i18n-attr="aria-label:compare.'+(on?'yes':'no')+'">'+(on?'<svg aria-hidden="true"><use href="#i-check"></use></svg>':'<span aria-hidden="true">—</span>')+'</span></td>').join('')+'</tr>').join('\n');
   html = html.replace(/(<table id="compareTable">[\s\S]*?<tbody>)[\s\S]*?(<\/tbody>)/, '$1\n'+rows+'\n$2');
   html = html.replace(/(<([a-z][a-z0-9]*)\b[^>]*\bdata-i18n="([^"]+)"[^>]*>)[\s\S]*?(<\/\2>)/g, (_, start, tag, key, end) => start+(key==='hero.badge'?t(key):escape(t(key)))+end);
   html = html.replace(/<[a-z][^>]*\bdata-i18n-attr="([^"]+)"[^>]*>/g, (tag, pairs) => {
