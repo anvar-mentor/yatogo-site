@@ -1029,7 +1029,7 @@ en: {
 Object.assign(window.I18N.ru, {
   "launch.kicker": "Ваш запуск бизнеса",
   "launch.title": "Соберите свой бизнес в Узбекистане",
-  "launch.intro": "Ответьте на 4 вопроса — покажем подходящий тариф, стоимость и срок.",
+  "launch.intro": "Ответьте на 4 вопроса — подберём тариф или бесплатную консультацию.",
   "launch.step": "Шаг {n} из 4",
   "launch.hint": "Нажмите на подходящий вариант",
   "launch.choose": "Выбрать",
@@ -1108,7 +1108,7 @@ Object.assign(window.I18N.ru, {
 Object.assign(window.I18N.en, {
   "launch.kicker": "Your business launch",
   "launch.title": "Plan your business in Uzbekistan",
-  "launch.intro": "Answer 4 questions to see a suitable package, price and timeline.",
+  "launch.intro": "Answer 4 questions to find a package or a free consultation.",
   "launch.step": "Step {n} of 4",
   "launch.hint": "Tap the option that fits you",
   "launch.choose": "Choose",
@@ -1187,7 +1187,7 @@ Object.assign(window.I18N.en, {
 Object.assign(window.I18N.uz, {
   "launch.kicker": "Biznesingizni boshlash",
   "launch.title": "O‘zbekistonda biznesingizni rejalashtiring",
-  "launch.intro": "4 savolga javob bering — mos tarif, narx va muddatni ko‘rsatamiz.",
+  "launch.intro": "4 savolga javob bering — mos tarif yoki bepul maslahatni taklif qilamiz.",
   "launch.step": "4 qadamdan {n}-qadam",
   "launch.hint": "Mos variantni bosing",
   "launch.choose": "Tanlash",
@@ -1262,4 +1262,26 @@ Object.assign(window.I18N.uz, {
   "tax26.verified": "Tekshirildi: 2026-yil 8-oktabr",
   "tax26.code": "Soliq kodeksi",
   "tax26.brv": "BHM miqdori"
+});
+
+Object.assign(window.I18N.ru, {
+  "launch.consultIntro": "Поможем определиться с запуском",
+  "launch.consultTitle": "Бесплатная консультация",
+  "launch.consultText": "Обсудим вашу задачу, ответим на вопросы и подскажем, какой формат регистрации и сопровождения вам подходит.",
+  "launch.consultNote": "0 $ — стоимость первичной консультации. Регистрация бизнеса и платные услуги согласовываются отдельно.",
+  "launch.consultCta": "Получить бесплатную консультацию"
+});
+Object.assign(window.I18N.en, {
+  "launch.consultIntro": "Let us help you plan your launch",
+  "launch.consultTitle": "Free consultation",
+  "launch.consultText": "We will discuss your plans, answer questions and help you choose registration and support.",
+  "launch.consultNote": "The initial consultation costs $0. Business registration and paid services are agreed separately.",
+  "launch.consultCta": "Get a free consultation"
+});
+Object.assign(window.I18N.uz, {
+  "launch.consultIntro": "Biznes boshlashni rejalashtirishga yordam beramiz",
+  "launch.consultTitle": "Bepul maslahat",
+  "launch.consultText": "Rejalaringizni muhokama qilamiz, savollarga javob beramiz va mos ro‘yxatdan o‘tish hamda yordam turini tanlashga ko‘maklashamiz.",
+  "launch.consultNote": "Dastlabki maslahat narxi — 0 $. Biznesni ro‘yxatdan o‘tkazish va pullik xizmatlar alohida kelishiladi.",
+  "launch.consultCta": "Bepul maslahat olish"
 });

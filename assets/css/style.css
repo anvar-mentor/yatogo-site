@@ -783,55 +783,7 @@ body{
 .nav a.is-current{ color:var(--accent); background:var(--accent-soft); }
 .mobile-nav a.is-current{ color:var(--accent); }
 
-/* ============================================================
-   Подбор тарифа
-   ============================================================ */
-.quiz{
-  display:grid; gap:24px; grid-template-columns:1fr;
-  margin-bottom:clamp(32px,4vw,48px);
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--r-xl); padding:clamp(22px,3vw,34px);
-  box-shadow:var(--shadow-1);
-}
-@media (min-width:900px){ .quiz{ grid-template-columns:.8fr 1.2fr; gap:40px; align-items:center; } }
-.quiz__title{ font-size:clamp(1.3rem,1.1rem + .8vw,1.7rem); }
-.quiz__sub{ margin-top:10px; color:var(--muted); }
 
-.quiz__body{ min-height:220px; display:flex; flex-direction:column; justify-content:center; }
-.quiz__meta{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; font-size:.8rem; color:var(--muted); font-weight:600; }
-.quiz__dots{ display:flex; gap:6px; }
-.quiz__dots span{ width:22px; height:4px; border-radius:4px; background:var(--bg-soft); transition:background .3s var(--ease); }
-.quiz__dots span.on{ background:var(--accent); }
-.quiz__q{ font-size:1.12rem; font-weight:600; letter-spacing:-.01em; margin-bottom:16px; }
-.quiz__opts{ display:grid; gap:10px; grid-template-columns:1fr; }
-@media (min-width:560px){ .quiz__opts{ grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); } }
-.quiz__opt{
-  min-height:52px; padding:12px 18px; text-align:left;
-  background:var(--bg); border:1.5px solid var(--border);
-  border-radius:var(--r-md); cursor:pointer; font-weight:560; font-size:.95rem;
-  transition:border-color .2s var(--ease), background .2s var(--ease), transform .2s var(--ease);
-}
-.quiz__opt:hover{ border-color:var(--accent); background:var(--accent-soft); }
-.quiz__opt:active{ transform:scale(.98); }
-.quiz__back{
-  margin-top:14px; align-self:flex-start;
-  background:none; border:0; padding:8px 0; min-height:44px;
-  color:var(--muted); font-size:.85rem; cursor:pointer;
-}
-.quiz__back:hover{ color:var(--ink); }
-.quiz__panel{ animation:rise .35s var(--ease); }
-
-.quiz__result{ display:grid; gap:12px; }
-.quiz__label{ font-size:.8rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
-.quiz__plan{ display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
-.quiz__plan-name{ font-size:2rem; font-weight:700; letter-spacing:-.03em; color:var(--accent); }
-.quiz__plan-days{ color:var(--muted); font-size:.92rem; }
-.quiz__plan-days b{ color:var(--ink); font-size:1.1rem; }
-.quiz__why{ color:var(--ink-2); font-size:.95rem; }
-.quiz__actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
-
-/* Выбранный подбором тариф подсвечивается и в карточках */
-.plan.is-picked{ border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft), var(--shadow-2); }
 
 /* ============================================================
    Таблицы на телефоне
@@ -948,28 +900,6 @@ body{
    Калькулятор тарифов — заметный блок:
    переливающаяся изумрудная рамка, тонированный фон, свечение
    ============================================================ */
-@property --quiz-angle{ syntax:'<angle>'; initial-value:0deg; inherits:false; }
-.quiz{
-  position:relative; isolation:isolate;
-  border:2px solid transparent;
-  background:
-    linear-gradient(135deg,#F2FAF6,#FFFFFF 55%,#EEF7F2) padding-box,
-    conic-gradient(from var(--quiz-angle),#0B7A5B,#3FC08A,#A7E3C7,#0B7A5B,#157A57,#0B7A5B) border-box;
-  box-shadow:0 20px 50px -18px rgba(11,122,91,.35), 0 0 0 6px rgba(11,122,91,.06);
-  animation:quizSpin 6s linear infinite;
-}
-@keyframes quizSpin{ to{ --quiz-angle:360deg; } }
-.quiz__icon{
-  display:inline-grid; place-items:center;
-  width:48px; height:48px; margin:0 12px 14px 0; vertical-align:middle;
-  border-radius:14px; background:var(--accent); color:#fff;
-  box-shadow:0 8px 18px -6px rgba(11,122,91,.55);
-}
-.quiz__icon svg{ width:24px; height:24px; }
-.quiz .section__kicker{ vertical-align:middle; margin-bottom:14px; }
-.quiz__opt{ background:#fff; }
-@media (prefers-reduced-motion: reduce){ .quiz{ animation:none; } }
-
 /* Package prices and conditions. */
 .plan__price{font-size:36px;font-weight:700;color:var(--ink);margin:16px 0 0;line-height:1.2}
 .plans-conditions{max-width:980px;margin:12px auto 0;text-align:center;color:var(--muted);font-size:.92rem;line-height:1.65}
