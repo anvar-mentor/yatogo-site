@@ -1285,3 +1285,11 @@ Object.assign(window.I18N.uz, {
   "launch.consultNote": "Dastlabki maslahat narxi — 0 $. Biznesni ro‘yxatdan o‘tkazish va pullik xizmatlar alohida kelishiladi.",
   "launch.consultCta": "Bepul maslahat olish"
 });
+
+Object.assign(window.I18N.ru, {"bank.warn":"При очном открытии счёта компанию представляет директор. Если директор — гражданин Узбекистана, банковские процедуры выполняет он. Иностранному учредителю со 100% долей, который не является директором, как правило, не требуется приезжать лично. Требования к идентификации учредителя и директора уточняем в выбранном банке."});
+Object.assign(window.I18N.en, {"bank.warn":"For an in-person account opening, the company is represented by its director. If the director is an Uzbek citizen, they handle the banking procedures. A foreign founder owning 100% who is not the director generally does not need to attend personally. We confirm founder and director identification requirements with the selected bank."});
+Object.assign(window.I18N.uz, {"bank.warn":"Hisobvaraq bankka kelib ochilganda kompaniya nomidan direktor qatnashadi. Direktor O‘zbekiston fuqarosi bo‘lsa, bank jarayonlarini u bajaradi. Direktor bo‘lmagan 100% ulushga ega xorijiy ta’sischining shaxsan kelishi odatda talab etilmaydi. Ta’sischi va direktorni identifikatsiya qilish talablarini tanlangan bank bilan aniqlashtiramiz."});
+
+Object.assign(window.I18N.ru, {'form.service.ipShort': 'Регистрация ИП'});
+Object.assign(window.I18N.en, {'form.service.ipShort': 'Individual entrepreneur registration'});
+Object.assign(window.I18N.uz, {'form.service.ipShort': 'YTTni ro‘yxatdan o‘tkazish'});
