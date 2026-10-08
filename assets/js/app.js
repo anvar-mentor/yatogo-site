@@ -155,6 +155,7 @@
     applyPrivacyLinks();
     renderReviews();
     renderQuiz();
+    renderLaunchBuilder(false);
   }
 
   function setLang(next, updateUrl) {
@@ -850,6 +851,87 @@
   }
 
   /* ────────────────────────────────────────────────────────── */
+  // The launch recommendation depends on founder support and service scope.
+  // Activity and travel preferences are passed to the adviser, not used as promises.
+  var launchStep = 0;
+  var launchAnswers = [];
+  var launchOptionCounts = [4, 2, 4, 3];
+  var lastLaunchComment = '';
+  function launchPlan() {
+    if (launchAnswers[2] === 2) return 'Premium';
+    if (launchAnswers[1] === 1 || launchAnswers[2] === 1 || launchAnswers[2] === 3) return 'Business';
+    return 'Classic';
+  }
+  function launchEscape(value) {
+    return String(value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function renderLaunchBuilder(focus) {
+    var body = $('#launchBody');
+    if (!body) return;
+    var esc = launchEscape;
+    $('#launchCount').textContent = launchStep < 4 ? t('launch.step').replace('{n}', launchStep + 1) : '4 / 4';
+    var content;
+    if (launchStep < 4) {
+      content = '<div class="launch-progress" aria-hidden="true">' + [0,1,2,3].map(function(i) {
+        return '<i' + (i <= launchStep ? ' style="background:#0b7a5b"' : '') + '></i>';
+      }).join('') + '</div><h3 id="launchQuestion" tabindex="-1">' + esc(t('launch.q' + launchStep)) + '</h3>'
+        + '<p class="launch-hint">' + esc(t('launch.hint')) + '</p><div class="launch-options">';
+      for (var i = 0; i < launchOptionCounts[launchStep]; i++) {
+        content += '<button type="button" data-launch-option="' + i + '"' + (launchAnswers[launchStep] === i ? ' aria-current="true"' : '') + '>'
+          + '<span aria-hidden="true">' + (launchStep === 0 ? ['↗','▤','U','…'][i] : ['①','②','③','④'][i]) + '</span>'
+          + '<b>' + esc(t('launch.o' + launchStep + '.' + i)) + '</b>'
+          + (launchStep === 0 ? '<small>' + esc(t('launch.desc' + i)) + '</small>' : '')
+          + '<em class="launch-choose">' + esc(t('launch.choose')) + '<span aria-hidden="true">→</span></em></button>';
+      }
+      content += '</div>' + (launchStep ? '<button type="button" class="launch-back" data-launch-back>← ' + esc(t('launch.back')) + '</button>' : '');
+    } else {
+      var plan = launchPlan();
+      var days = {Classic:'10',Business:'5',Premium:'2'}[plan];
+      content = '<div class="launch-result"><p>' + esc(t('launch.result')) + '</p><h3 id="launchQuestion" tabindex="-1">' + plan + '</h3>'
+        + '<div class="launch-price">' + {Classic:'650',Business:'900',Premium:'1 150'}[plan] + ' $</div>'
+        + '<div class="launch-days">' + esc(t('plans.days' + days)) + ' ' + esc(t('plans.daysLabel')) + '</div>'
+        + '<p>' + esc(t('launch.reason' + plan)) + '</p><p class="launch-small">' + esc(t('launch.extra')) + '</p>'
+        + (launchAnswers[3] !== 1 ? '<p class="launch-small">' + esc(t('launch.remote')) + '</p>' : '')
+        + '<button type="button" class="btn btn--primary" data-launch-discuss>' + esc(t('launch.discuss')) + '</button>'
+        + '<button type="button" class="launch-restart" data-launch-restart>' + esc(t('launch.restart')) + '</button></div>';
+    }
+    body.innerHTML = content;
+    if (focus) $('#launchQuestion').focus({preventScroll:true});
+  }
+  function initLaunchBuilder() {
+    var builder = $('#launchBuilder');
+    if (!builder) return;
+    builder.addEventListener('click', function (event) {
+      var option = event.target.closest('[data-launch-option]');
+      if (option && launchStep < 4) {
+        launchAnswers[launchStep] = Number(option.getAttribute('data-launch-option'));
+        launchStep++;
+        renderLaunchBuilder(true);
+      } else if (event.target.closest('[data-launch-back]')) {
+        launchStep = Math.max(0, launchStep - 1);
+        renderLaunchBuilder(true);
+      } else if (event.target.closest('[data-launch-restart]')) {
+        launchStep = 0;
+        renderLaunchBuilder(true);
+      } else if (event.target.closest('[data-launch-discuss]')) {
+        var summary = t('launch.title') + '\n' + launchAnswers.map(function(answer,i) {
+          return t('launch.q'+i) + ' ' + t('launch.o'+i+'.'+answer);
+        }).join('\n');
+        var comment = $('#f-comment');
+        if (comment) {
+          var existing = comment.value;
+          if (lastLaunchComment) existing = existing.replace(lastLaunchComment, '').trim();
+          comment.value = (existing ? existing + '\n\n' : '') + summary;
+          lastLaunchComment = summary;
+        }
+        showPlanForm(launchPlan());
+      }
+    });
+    renderLaunchBuilder(false);
+  }
+
   function init() {
     buildCompareTable();   // до перевода: строки таблицы тоже несут data-i18n
     applyConfig();
@@ -869,6 +951,7 @@
     initTables();
     initMobileBar();
     initPlanButtons();
+    initLaunchBuilder();
     initForm();
   }
 
