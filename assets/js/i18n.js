@@ -1293,3 +1293,6 @@ Object.assign(window.I18N.uz, {"bank.warn":"Hisobvaraq bankka kelib ochilganda k
 Object.assign(window.I18N.ru, {'form.service.ipShort': 'Регистрация ИП'});
 Object.assign(window.I18N.en, {'form.service.ipShort': 'Individual entrepreneur registration'});
 Object.assign(window.I18N.uz, {'form.service.ipShort': 'YTTni ro‘yxatdan o‘tkazish'});
+Object.assign(window.I18N.ru, {'contact.waGreeting': 'Здравствуйте! Обращаюсь с сайта YATOGO. Хочу обсудить открытие бизнеса в Узбекистане. Подскажите, с чего начать?'});
+Object.assign(window.I18N.en, {'contact.waGreeting': 'Hello! I found you through the YATOGO website. I would like to discuss starting a business in Uzbekistan. Could you advise me on where to begin?'});
+Object.assign(window.I18N.uz, {'contact.waGreeting': 'Assalomu alaykum! YATOGO sayti orqali murojaat qilyapman. O‘zbekistonda biznes ochishni muhokama qilmoqchiman. Nimadan boshlashni maslahat berasiz?'});
