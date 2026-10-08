@@ -261,13 +261,48 @@
   }
 
   /* ──────────────────────────────────────────────────────────
-     Кнопки «Узнать стоимость» подставляют тариф в форму
+     Кнопки «Выбрать тариф» открывают форму с выбранным тарифом
      ────────────────────────────────────────────────────────── */
+  var planFormPlaceholder;
+  var planFormTrigger;
+  var planFormOverflow;
+  function showPlanForm(plan) {
+    var form = $('#leadForm');
+    var dialog = $('#planDialog');
+    var sel = $('#f-plan');
+    if (sel) sel.value = plan;
+    if (!form || !dialog || dialog.open) return;
+    planFormTrigger = document.activeElement;
+    planFormPlaceholder = document.createElement('div');
+    planFormPlaceholder.style.height = form.offsetHeight + 'px';
+    form.before(planFormPlaceholder);
+    form.classList.remove('is-pending');
+    form.classList.add('is-in');
+    dialog.appendChild(form);
+    planFormOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    dialog.showModal();
+  }
+
   function initPlanButtons() {
+    var dialog = $('#planDialog');
+    if (dialog) {
+      $('[data-close-plan]', dialog).addEventListener('click', function () { dialog.close(); });
+      dialog.addEventListener('click', function (e) {
+        var rect = dialog.getBoundingClientRect();
+        if (e.target === dialog && (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom)) dialog.close();
+      });
+      dialog.addEventListener('close', function () {
+        var form = $('#leadForm');
+        if (planFormPlaceholder && form) planFormPlaceholder.replaceWith(form);
+        document.documentElement.style.overflow = planFormOverflow || '';
+        if (planFormTrigger && planFormTrigger.isConnected) planFormTrigger.focus({ preventScroll: true });
+      });
+    }
     $$('[data-plan]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var sel = $('#f-plan');
-        if (sel) sel.value = btn.getAttribute('data-plan');
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        showPlanForm(btn.getAttribute('data-plan'));
       });
     });
   }
@@ -763,11 +798,7 @@
       if (a === 'back')    { quizAnswers.pop(); renderQuiz(); }
       if (a === 'restart') { quizAnswers = []; renderQuiz(); }
       if (a === 'choose') {
-        var sel = $('#f-plan');
-        if (sel) sel.value = act.getAttribute('data-plan-pick');
-        var contact = $('#contact');
-        if (contact) contact.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
-        setTimeout(function () { var n = $('#f-name'); if (n) n.focus({ preventScroll: true }); }, REDUCED ? 0 : 600);
+        showPlanForm(act.getAttribute('data-plan-pick'));
       }
     });
     renderQuiz();

@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css?v=252388ea5c12">
-<link rel="stylesheet" href="assets/css/style.css?v=27e6cea923d9">
+<link rel="stylesheet" href="assets/css/style.css?v=9b991434a8de">
 <!-- Yandex.Metrika counter -->
 <script>
 (function(m,e,t,r,i,k,a){
@@ -548,7 +548,7 @@ ym(113132820,'init',{
           <li data-i18n="compare.f7">Standard company seal</li>
           <li data-i18n="compare.f8">Preparation of documents for opening a bank account</li>
         </ul>
-        <a class="btn btn--ghost btn--block" href="#contact" data-plan="Classic" data-i18n="plans.cta">Choose package</a>
+        <a class="btn btn--ghost btn--block" href="#leadForm" data-plan="Classic" data-i18n="plans.cta">Choose package</a>
       </article>
 
       <article class="plan reveal">
@@ -569,7 +569,7 @@ ym(113132820,'init',{
           <li data-i18n="compare.f14">Preparation of bank KYC documents</li>
           <li data-i18n="compare.f15">Provision of a local director*</li>
         </ul>
-        <a class="btn btn--ghost btn--block" href="#contact" data-plan="Business" data-i18n="plans.cta">Choose package</a>
+        <a class="btn btn--ghost btn--block" href="#leadForm" data-plan="Business" data-i18n="plans.cta">Choose package</a>
       </article>
 
       <article class="plan plan--featured reveal">
@@ -588,7 +588,7 @@ ym(113132820,'init',{
           <li data-i18n="compare.f18">Company seal with a logo</li>
           <li data-i18n="compare.f19">Personal transport and business assistant</li>
         </ul>
-        <a class="btn btn--primary btn--block" href="#contact" data-plan="Premium" data-i18n="plans.cta">Choose package</a>
+        <a class="btn btn--primary btn--block" href="#leadForm" data-plan="Premium" data-i18n="plans.cta">Choose package</a>
       </article>
     </div>
 
@@ -812,7 +812,7 @@ ym(113132820,'init',{
       </div>
 
       <noscript><p class="contact__lead" data-i18n="form.nojs">JavaScript is required to send this form. You can also contact us using the Telegram or WhatsApp links nearby.</p></noscript>
-      <form class="form reveal ym-hide-content ym-disable-submit" id="leadForm" novalidate>
+      <form class="form reveal ym-hide-content ym-disable-submit" id="leadForm" tabindex="-1" novalidate>
         <div class="form__grid">
           <div class="field">
             <label for="f-name"><span data-i18n="form.name.label">Name</span> <span class="req" aria-hidden="true">*</span></label>
@@ -849,7 +849,7 @@ ym(113132820,'init',{
             </select>
           </div>
           <div class="field field--full">
-            <label for="f-comment" data-i18n="form.comment.label">Comment</label>
+            <label for="f-comment" data-i18n="form.comment.label">Comment (optional)</label>
             <textarea id="f-comment" class="ym-disable-keys" name="comment" rows="4" data-i18n-attr="placeholder:form.comment.ph" placeholder="Type of activity, founders’ citizenship, preferred timeline"></textarea>
           </div>
         </div>
@@ -928,9 +928,13 @@ ym(113132820,'init',{
   <a class="mbar__btn mbar__btn--wa" data-wa-link href="https://wa.me/998501113939" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"></use></svg><span>WhatsApp</span></a>
 </nav>
 
+<dialog class="plan-dialog" id="planDialog" data-i18n-attr="aria-label:contact.h2" aria-label="Request a call">
+  <button class="plan-dialog__close" type="button" data-close-plan data-i18n-attr="aria-label:form.close" aria-label="Close form" autofocus><svg aria-hidden="true"><use href="#i-cross"></use></svg></button>
+</dialog>
+
 <script defer src="site.config.js?v=90e9c4aea957"></script>
-<script defer src="assets/js/i18n.js?v=7ca3110e6ba2"></script>
+<script defer src="assets/js/i18n.js?v=a8eb6cfce8f5"></script>
 <script defer src="assets/js/reviews.js?v=da36d63d8ae0"></script>
-<script defer src="assets/js/app.js?v=a393a3f98a7e"></script>
+<script defer src="assets/js/app.js?v=ba26dc51bccf"></script>
 </body>
 </html>
