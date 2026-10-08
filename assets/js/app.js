@@ -654,71 +654,13 @@
   }
 
 
-  /* ──────────────────────────────────────────────────────────
-     Маска телефона: +998 90 123 45 67.
-     Поле принимает и Telegram-ник (@username), и иностранные номера
-     (+90…, +7…) — их не переформатируем в узбекский вид.
-     ────────────────────────────────────────────────────────── */
-  function formatUz(d) {                    // d — цифры, начиная с 998
-    d = d.slice(0, 12);
-    var out = '+' + d.slice(0, 3);
-    if (d.length > 3)  out += ' ' + d.slice(3, 5);
-    if (d.length > 5)  out += ' ' + d.slice(5, 8);
-    if (d.length > 8)  out += ' ' + d.slice(8, 10);
-    if (d.length > 10) out += ' ' + d.slice(10, 12);
-    return out;
-  }
-  function phoneKind(v) {
+  /* Phone numbers from any country are entered without an input mask. */
+  function checkContact(v) {
     v = v.trim();
-    if (!v) return 'empty';
-    if (/^@|^[a-z_]/i.test(v)) return 'username';
+    if (!v) return 'form.err.phone';
+    if (/^@?[a-z_][a-z0-9_]{3,}$/i.test(v)) return '';
     var digits = v.replace(/\D/g, '');
-    if (v.charAt(0) === '+') {
-      if ('998'.indexOf(digits) === 0) return 'typing';     // «+», «+9», «+99» — ещё непонятно, чей номер
-      if (digits.indexOf('998') !== 0) return 'foreign';    // +90…, +7… — иностранный
-    }
-    return 'uz';
-  }
-  function checkContact(v) {                // → ключ ошибки или ''
-    var kind = phoneKind(v), digits = v.replace(/\D/g, '');
-    if (kind === 'empty') return 'form.err.phone';
-    if (kind === 'username') return v.replace(/^@/, '').length >= 4 ? '' : 'form.err.phone';
-    if (kind === 'foreign' || kind === 'typing') return digits.length >= 8 ? '' : 'form.phone.err.short';
-    return digits.length === 12 ? '' : 'form.phone.err.short';
-  }
-  function initPhoneMask() {
-    var input = $('#f-phone');
-    if (!input) return;
-    input.addEventListener('focus', function () {
-      if (!input.value) { input.value = '+998 '; }
-    });
-    input.addEventListener('blur', function () {
-      if (/^\+?998\s*$/.test(input.value.trim())) input.value = '';
-    });
-    input.addEventListener('input', function (e) {
-      var v = input.value;
-      var kind = phoneKind(v);
-      if (kind === 'username') { input.value = v.replace(/\s/g, ''); return; }
-      if (kind === 'foreign')  { input.value = '+' + v.replace(/[^\d ]/g, '').replace(/^\s+/, '').slice(0, 20); return; }
-      if (kind === 'empty' || kind === 'typing') return;
-      // сколько цифр стояло до курсора — чтобы вернуть курсор на то же место
-      var caret = input.selectionStart || v.length;
-      var before = v.slice(0, caret).replace(/\D/g, '').length;
-      var digits = v.replace(/\D/g, '');
-      // к автоподставленному +998 дописали номер целиком, с 998 — убираем дубль
-      if (digits.indexOf('998998') === 0) { digits = digits.slice(3); before = Math.max(3, before - 3); }
-      if (digits.indexOf('998') !== 0) {
-        // набрали местный номер (90 123 45 67) — дописываем код страны
-        before += '998'.startsWith(digits) ? 0 : 3;
-        digits = '998'.startsWith(digits) ? '998' : '998' + digits;
-      }
-      var out = formatUz(digits);
-      input.value = out;
-      if (e.inputType && e.inputType.indexOf('delete') === 0 && before <= 3) return;
-      var pos = 0, seen = 0;
-      while (pos < out.length && seen < before) { if (/\d/.test(out.charAt(pos))) seen++; pos++; }
-      try { input.setSelectionRange(pos, pos); } catch (err) {}
-    });
+    return /^[+\d\s().-]+$/.test(v) && digits.length >= 7 && digits.length <= 15 ? '' : 'form.phone.err.short';
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -921,7 +863,6 @@
     initCounters();
     initStepsPath();
     initScrollBg();
-    initPhoneMask();
     initQuiz();
     initScrollSpy();
     initTouchReviews();
