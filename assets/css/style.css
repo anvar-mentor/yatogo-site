@@ -973,3 +973,10 @@ body{
 /* Package prices and conditions. */
 .plan__price{font-size:36px;font-weight:700;color:var(--ink);margin:16px 0 0;line-height:1.2}
 .plans-conditions{max-width:980px;margin:12px auto 0;text-align:center;color:var(--muted);font-size:.92rem;line-height:1.65}
+
+.plan-dialog{width:min(800px,calc(100% - 32px));max-width:none;max-height:calc(100dvh - 32px);margin:auto;padding:0;border:0;border-radius:var(--r-xl);background:var(--surface);color:var(--ink);overflow:auto;overscroll-behavior:contain;box-shadow:0 24px 80px rgba(0,0,0,.2)}
+.plan-dialog::backdrop{background:rgba(10,30,25,.55)}
+.plan-dialog .form{margin:0;border:0;box-shadow:none;padding-top:64px;opacity:1;transform:none}
+.plan-dialog__close{position:absolute;top:14px;right:16px;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--border);border-radius:50%;background:#fff;color:var(--ink);cursor:pointer}
+.plan-dialog__close svg{width:20px;height:20px}
+@media(max-width:639px){.plan-dialog .form{padding:60px 20px 24px}}
