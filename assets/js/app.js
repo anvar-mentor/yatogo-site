@@ -34,23 +34,25 @@
      Матрица тарифов: [ключ услуги, Classic, Business, Premium]
      ────────────────────────────────────────────────────────── */
   var MATRIX = [
-    ['compare.f1',  1, 1, 1],
-    ['compare.f2',  1, 1, 1],
-    ['compare.f3',  1, 1, 1],
-    ['compare.f4',  1, 1, 1],
-    ['compare.f5',  1, 1, 1],
-    ['compare.f6',  1, 1, 1],
-    ['compare.f7',  1, 1, 1],
-    ['compare.f8',  0, 1, 1],
-    ['compare.f9',  0, 1, 1],
+    ['compare.f1', 1, 1, 1],
+    ['compare.f2', 1, 1, 1],
+    ['compare.f3', 1, 1, 1],
+    ['compare.f4', 1, 1, 1],
+    ['compare.f5', 1, 1, 1],
+    ['compare.f6', 1, 1, 1],
+    ['compare.f7', 1, 1, 1],
+    ['compare.f8', 1, 1, 1],
+    ['compare.f9', 0, 1, 1],
     ['compare.f10', 0, 1, 1],
     ['compare.f11', 0, 1, 1],
     ['compare.f12', 0, 1, 1],
     ['compare.f13', 0, 1, 1],
-    ['compare.f14', 0, 0, 1],
-    ['compare.f15', 0, 0, 1],
+    ['compare.f14', 0, 1, 1],
+    ['compare.f15', 0, 1, 1],
     ['compare.f16', 0, 0, 1],
-    ['compare.f17', 0, 0, 1]
+    ['compare.f17', 0, 0, 1],
+    ['compare.f18', 0, 0, 1],
+    ['compare.f19', 0, 0, 1]
   ];
 
   function buildCompareTable() {
@@ -66,7 +68,7 @@
         html += '<td class="is-center">'
               + '<span class="mark ' + (on ? 'mark--yes' : 'mark--no') + '" role="img"'
               + ' data-i18n-attr="aria-label:' + (on ? 'compare.yes' : 'compare.no') + '">'
-              + '<svg aria-hidden="true"><use href="#' + (on ? 'i-check' : 'i-cross') + '"></use></svg>'
+              + (on ? '<svg aria-hidden="true"><use href="#i-check"></use></svg>' : '<span aria-hidden="true">—</span>')
               + '</span></td>';
       }
       html += '</tr>';
@@ -727,7 +729,7 @@
       html = '<div class="quiz__panel quiz__result">'
         + '<span class="quiz__label">' + esc(t('quiz.result')) + '</span>'
         + '<div class="quiz__plan"><span class="quiz__plan-name">' + r.plan + '</span>'
-        + '<span class="quiz__plan-days"><b>' + PLAN_DAYS[r.plan] + '</b> ' + esc(t('quiz.days')) + '</span></div>'
+        + '<span class="quiz__plan-days"><b>' + esc(t('plans.days' + PLAN_DAYS[r.plan])) + '</b> ' + esc(t('quiz.days')) + '</span></div>'
         + '<p class="quiz__why">' + esc(t(r.why)) + '</p>'
         + '<div class="quiz__actions">'
         + '<button type="button" class="btn btn--primary" data-quiz="choose" data-plan-pick="' + r.plan + '">' + esc(t('quiz.choose')) + '</button>'
