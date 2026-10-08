@@ -980,3 +980,569 @@ body{
 .plan-dialog__close{position:absolute;top:14px;right:16px;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--border);border-radius:50%;background:#fff;color:var(--ink);cursor:pointer}
 .plan-dialog__close svg{width:20px;height:20px}
 @media(max-width:639px){.plan-dialog .form{padding:60px 20px 24px}}
+
+/* Approved interactive hero and 2026 tax section */
+.hero__visual{
+  max-width:none;
+  padding:0;
+  animation:none
+}
+.launch-card{
+  background:rgba(255,255,255,.96);
+  border:1px solid #dce7e2;
+  border-radius:28px;
+  padding:30px;
+  box-shadow:0 22px 65px #075b4020;
+  text-align:left
+}
+.launch-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px
+}
+.launch-top .section__kicker{
+  font-size:10px;
+  padding:7px 10px;
+  letter-spacing:.06em
+}
+.launch-count{
+  font-size:12px;
+  color:var(--muted);
+  white-space:nowrap
+}
+.launch-card h2{
+  font-size:30px;
+  letter-spacing:-.035em;
+  line-height:1.2;
+  margin:24px 0 12px
+}
+.launch-intro{
+  font-size:15px;
+  color:var(--muted);
+  line-height:1.6
+}
+.launch-progress{
+  display:flex;
+  gap:7px;
+  margin:24px 0
+}
+.launch-progress i{
+  height:4px;
+  flex:1;
+  border-radius:5px;
+  background:#e9efec
+}
+.launch-progress i:first-child{
+  background:#0b7a5b
+}
+.launch-card h3{
+  font-size:20px;
+  line-height:1.4;
+  margin:0
+}
+.launch-hint{
+  font-size:13px;
+  color:var(--muted);
+  margin:6px 0 16px
+}
+.launch-options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+.launch-options button{
+  font:inherit;
+  cursor:pointer;
+  text-align:left;
+  background:#fff;
+  border:1px solid #dce4df;
+  border-radius:16px;
+  padding:17px;
+  display:flex;
+  flex-direction:column;
+  min-height:127px;
+  transition:.2s
+}
+.launch-options button:hover{
+  border-color:#0b7a5b;
+  background:#f0f9f5
+}
+.launch-options button>span{
+  background:#e3f3eb;
+  color:#0b7a5b;
+  border-radius:9px;
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  margin-bottom:12px;
+  font-weight:700;
+  font-size:18px
+}
+.launch-options b{
+  font-size:16px;
+  font-weight:600
+}
+.launch-options small{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:5px;
+  line-height:1.4
+}
+.launch-foot{
+  border-top:1px solid #e8eeeb;
+  padding-top:17px;
+  margin-top:22px;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:12px
+}
+.launch-foot svg{
+  width:18px;
+  height:18px;
+  color:#0b7a5b;
+  flex:none
+}
+.hero__copy>*{
+  animation:none!important
+}
+@media(min-width:1000px){
+  .hero__layout{
+    grid-template-columns:1.08fr 1fr;
+    gap:48px
+  }
+  .hero{
+    padding-top:65px
+  }
+  .hero__copy h1{
+    font-size:51px
+  }
+  .hero__sub{
+    font-size:18px
+  }
+  .hero__visual{
+    align-self:center
+  }
+
+}
+@media(max-width:600px){
+  .hero{
+    padding-top:25px;
+    padding-bottom:30px
+  }
+  .hero__layout{
+    gap:22px
+  }
+  .hero__copy{
+    display:contents
+  }
+  .hero__copy .hero__badge{
+    order:0;
+    font-size:11px;
+    justify-self:center;
+    margin:0
+  }
+  .hero__copy .hero__slogan{
+    display:none
+  }
+  .hero__copy h1{
+    order:1;
+    font-size:30px;
+    text-align:center;
+    margin:0;
+    line-height:1.14
+  }
+  .hero__visual{
+    order:2
+  }
+  .hero__copy .hero__sub{
+    order:3;
+    font-size:15px;
+    text-align:center;
+    margin:0;
+    line-height:1.6
+  }
+  .hero__copy .hero__cta{
+    order:4;
+    margin:0;
+    gap:10px
+  }
+  .hero__copy .hero__note{
+    order:5;
+    margin:0;
+    text-align:center;
+    font-size:12px
+  }
+  .launch-card{
+    padding:21px;
+    border-radius:24px
+  }
+  .launch-card h2{
+    font-size:24px;
+    margin:18px 0 10px
+  }
+  .launch-intro{
+    font-size:13px
+  }
+  .launch-top .section__kicker{
+    font-size:9px
+  }
+  .launch-count{
+    font-size:11px
+  }
+  .launch-progress{
+    margin:19px 0
+  }
+  .launch-card h3{
+    font-size:18px
+  }
+  .launch-options{
+    gap:10px
+  }
+  .launch-options button{
+    padding:13px;
+    min-height:120px
+  }
+  .launch-options b{
+    font-size:14px
+  }
+  .launch-options small{
+    font-size:10px
+  }
+  .launch-foot{
+    font-size:10px;
+    margin-top:17px;
+    padding-top:14px
+  }
+  .hero .stats{
+    margin-top:30px
+  }
+
+}
+
+.launch-options button{
+  background:#f8fcfa;
+  border-color:#acd1bd;
+  box-shadow:0 3px 0 #dcebe2;
+  min-height:158px
+}
+.launch-choose{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  margin-top:auto;
+  padding-top:14px;
+  color:#0b7a5b;
+  font-style:normal;
+  font-size:12px;
+  font-weight:600
+}
+.launch-choose > span:last-child{
+  display:grid;
+  place-items:center;
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:#e1f0e8;
+  font-size:18px
+}
+.launch-options button:hover,.launch-options button:focus-visible{
+  background:#edf8f2;
+  border-color:#0b7a5b;
+  box-shadow:0 5px 14px #0b7a5b18;
+  transform:translateY(-2px);
+  outline:2px solid #0b7a5b;
+  outline-offset:2px
+}
+.launch-options button:active{
+  transform:translateY(1px);
+  box-shadow:none
+}
+.launch-hint{
+  color:#0b7a5b;
+  font-weight:500
+}
+@media(max-width:600px){
+  .launch-options button{
+    min-height:151px
+  }
+  .launch-choose{
+    font-size:11px;
+    padding-top:10px
+  }
+
+}
+
+@media(min-width:1000px){
+  .hero{
+    padding-top:52px
+  }
+  .hero__layout{
+    align-items:start
+  }
+  .hero__copy{
+    padding-top:8px
+  }
+  .hero__visual{
+    align-self:start
+  }
+  .hero__copy h1{
+    font-size:56px;
+    line-height:1.12;
+    max-width:590px
+  }
+  .hero__copy .hero__sub{
+    font-size:19px;
+    line-height:1.65;
+    margin-top:24px
+  }
+  .hero__copy .hero__cta{
+    margin-top:28px
+  }
+  .launch-card{
+    padding:26px
+  }
+  .launch-card h2{
+    font-size:28px;
+    margin:18px 0 10px
+  }
+  .launch-intro{
+    font-size:14px;
+    line-height:1.5
+  }
+  .launch-progress{
+    margin:18px 0
+  }
+  .launch-options{
+    gap:10px
+  }
+  .launch-options button{
+    min-height:125px;
+    padding:14px
+  }
+  .launch-options button>span{
+    width:26px;
+    height:26px;
+    margin-bottom:8px;
+    font-size:16px
+  }
+  .launch-options b{
+    font-size:15px
+  }
+  .launch-options small{
+    font-size:10px;
+    margin-top:3px
+  }
+  .launch-choose{
+    padding-top:8px;
+    font-size:11px
+  }
+  .launch-choose > span:last-child{
+    width:22px;
+    height:22px
+  }
+  .launch-hint{
+    margin:4px 0 12px
+  }
+  .launch-foot{
+    margin-top:16px;
+    padding-top:13px;
+    font-size:11px
+  }
+
+}
+
+#taxes{
+  padding-top:48px;
+  padding-bottom:42px
+}
+.tax-pair{
+  gap:20px;
+  margin-bottom:20px
+}
+.tax-pair .section__kicker{
+  font-size:11px;
+  letter-spacing:.04em
+}
+.tax-pair h3{
+  margin-top:16px
+}
+.tax-rate{
+  font-size:48px;
+  line-height:1.2;
+  font-weight:700;
+  letter-spacing:-.04em;
+  color:var(--primary,#0b7a5b);
+  margin:16px 0 10px
+}
+.tax-rate span{
+  font-size:18px;
+  font-weight:400;
+  letter-spacing:0;
+  color:var(--muted)
+}
+.tax-note{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.65;
+  margin-top:18px
+}
+.tax-limit{
+  margin-bottom:20px
+}
+.tax-panels{
+  gap:16px;
+  margin-top:22px
+}
+.tax-panels>div{
+  padding:22px;
+  background:var(--bg-soft);
+  border-radius:var(--r-md)
+}
+.tax-panels h4{
+  font-size:21px;
+  line-height:1.4;
+  margin:12px 0
+}
+.tax-panels p{
+  font-size:15px;
+  color:var(--muted);
+  line-height:1.65
+}
+.tax-bottom .card{
+  padding-top:26px;
+  padding-bottom:26px
+}
+.tax-details{
+  padding:22px 30px
+}
+.tax-details summary{
+  cursor:pointer;
+  list-style:none;
+  font-weight:600;
+  display:flex;
+  justify-content:space-between;
+  gap:15px
+}
+.tax-details summary .tax-toggle{
+  color:#0b7a5b;
+  font-size:24px;
+  line-height:1
+}
+.tax-detail-text p{
+  margin-top:15px;
+  color:var(--muted);
+  line-height:1.65;
+  font-size:14px
+}
+.tax-footer{
+  text-align:center;
+  margin-top:26px
+}
+.tax-footer p{
+  margin-top:14px;
+  font-size:12px;
+  color:var(--muted)
+}
+.tax-footer p a{
+  text-decoration:underline
+}
+@media(max-width:600px){
+  #taxes{
+    padding-top:30px
+  }
+  .tax-pair .section__kicker{
+    font-size:10px
+  }
+  .tax-panels>div{
+    padding:18px
+  }
+  .tax-panels h4{
+    font-size:19px
+  }
+  .tax-details{
+    padding:22px
+  }
+  .tax-footer .btn{
+    width:100%
+  }
+  .tax-rate{
+    font-size:42px
+  }
+
+}
+
+.launch-back,.launch-restart{
+  border:0;
+  background:none;
+  color:var(--primary);
+  font:inherit;
+  font-size:13px;
+  cursor:pointer;
+  padding:12px 0
+}
+.launch-back{
+  margin-top:6px
+}
+.launch-result h3{
+  margin:16px 0 8px;
+  font-size:30px
+}
+.launch-price{
+  font-size:38px;
+  font-weight:700;
+  margin:12px 0;
+  color:var(--ink)
+}
+.launch-days{
+  font-size:20px;
+  color:var(--primary);
+  font-weight:600
+}
+.launch-result .btn{
+  width:100%;
+  margin-top:20px
+}
+.launch-result p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  margin-top:12px
+}
+.launch-result .launch-small{
+  font-size:12px
+}
+.launch-result .launch-restart{
+  display:block;
+  margin:auto
+}
+.tax-details[open] .tax-toggle{
+  transform:rotate(45deg)
+}
+.tax-details summary::-webkit-details-marker{
+  display:none
+}
+.launch-card:focus-within{
+  border-color:#acd1bd
+}
+@media(min-width:1000px){
+  .launch-card{
+    min-height:620px
+  }
+
+}
+
+
+.launch-card h2{
+  max-width:380px
+}
+@media(max-width:600px){
+  .launch-card h2{
+    max-width:280px
+  }
+
+}

@@ -31,7 +31,7 @@
 <link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css?v=252388ea5c12">
-<link rel="stylesheet" href="assets/css/style.css?v=9b991434a8de">
+<link rel="stylesheet" href="assets/css/style.css?v=05ca7f9dd95e">
 <!-- Yandex.Metrika counter -->
 <script>
 (function(m,e,t,r,i,k,a){
@@ -216,57 +216,99 @@ ym(113132820,'init',{
       <p class="hero__note" data-i18n="hero.note">We reply within one business day. The first consultation is free.</p>
     </div>
 
-    <div class="hero__visual" aria-hidden="true">
-      <div class="tracker" id="tracker">
-        <div class="tracker__head">
-          <div>
-            <div class="tracker__kicker" data-i18n="tracker.title">Company registration</div>
-            <div class="tracker__company" data-i18n="tracker.company">Your Company LLC</div>
-          </div>
-          <span class="tracker__status" id="trackerStatus" data-i18n="tracker.progress">In progress</span>
-        </div>
-        <div class="tracker__bar"><span id="trackerBar"></span></div>
-        <ol class="tracker__list">
-            <li class="tracker__step" data-step="1">
-              <span class="tracker__tick"><svg aria-hidden="true"><use href="#i-check"></use></svg></span>
-              <span class="tracker__label" data-i18n="steps.1.title">Choosing the legal form</span>
-              <span class="tracker__time" data-i18n="tracker.day1">Day 1</span>
-            </li>
-            <li class="tracker__step" data-step="2">
-              <span class="tracker__tick"><svg aria-hidden="true"><use href="#i-check"></use></svg></span>
-              <span class="tracker__label" data-i18n="steps.2.title">Preparing initial documents</span>
-              <span class="tracker__time" data-i18n="tracker.day1">Day 1</span>
-            </li>
-            <li class="tracker__step" data-step="3">
-              <span class="tracker__tick"><svg aria-hidden="true"><use href="#i-check"></use></svg></span>
-              <span class="tracker__label" data-i18n="steps.3.title">Drafting the charter documents</span>
-              <span class="tracker__time" data-i18n="tracker.day1">Day 1</span>
-            </li>
-            <li class="tracker__step" data-step="4">
-              <span class="tracker__tick"><svg aria-hidden="true"><use href="#i-check"></use></svg></span>
-              <span class="tracker__label" data-i18n="steps.4.title">Obtaining the certificate</span>
-              <span class="tracker__time" data-i18n="tracker.day2">Day 2</span>
-            </li>
-            <li class="tracker__step" data-step="5">
-              <span class="tracker__tick"><svg aria-hidden="true"><use href="#i-check"></use></svg></span>
-              <span class="tracker__label" data-i18n="steps.5.title">Producing the company seal</span>
-              <span class="tracker__time" data-i18n="tracker.day2">Day 2</span>
-            </li>
-            <li class="tracker__step" data-step="6">
-              <span class="tracker__tick"><svg aria-hidden="true"><use href="#i-check"></use></svg></span>
-              <span class="tracker__label" data-i18n="steps.6.title">Opening the bank account</span>
-              <span class="tracker__time" data-i18n="tracker.day2">Day 2</span>
-            </li>
-        </ol>
-        <div class="tracker__final" id="trackerFinal">
-          <svg aria-hidden="true"><use href="#i-shield"></use></svg>
-          <span data-i18n="tracker.final">Company registered in 2 business days</span>
-        </div>
-      </div>
-      <div class="chip chip--1"><svg><use href="#i-check"></use></svg><span data-i18n="chip.ecp">Digital signature issued</span></div>
-      <div class="chip chip--2"><svg><use href="#i-doc"></use></svg><span data-i18n="chip.cert">Certificate received</span></div>
-      <div class="chip chip--3"><svg><use href="#i-bank"></use></svg><span data-i18n="chip.bank">Account opened</span></div>
-    </div>
+    <div class="hero__visual"><section class="launch-card" id="launchBuilder" aria-labelledby="launchTitle">
+<div class="launch-top">
+<span class="section__kicker">
+<span data-i18n="launch.kicker">Your business launch</span>
+</span>
+<span class="launch-count" id="launchCount">Шаг 1 из 4</span>
+</div>
+<h2 id="launchTitle">
+<span data-i18n="launch.title">Plan your business in Uzbekistan</span>
+</h2>
+<p class="launch-intro">
+<span data-i18n="launch.intro">Answer 4 questions to see a suitable package, price and timeline.</span>
+</p>
+<div id="launchBody">
+<div class="launch-progress" aria-hidden="true">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+</div>
+<h3 id="launchQuestion" tabindex="-1">
+<span data-i18n="launch.q0">What will your business do?</span>
+</h3>
+<p class="launch-hint">
+<span data-i18n="launch.hint">Tap the option that fits you</span>
+</p>
+<div class="launch-options">
+<button type="button" data-launch-option="0">
+<span aria-hidden="true">↗</span>
+<b>
+<span data-i18n="launch.o0.0">Services</span>
+</b>
+<small>
+<span data-i18n="launch.desc0">IT, consulting and more</span>
+</small>
+<em class="launch-choose">
+<span data-i18n="launch.choose">Choose</span>
+<span aria-hidden="true">→</span>
+</em>
+</button>
+<button type="button" data-launch-option="1">
+<span aria-hidden="true">▤</span>
+<b>
+<span data-i18n="launch.o0.1">Trade</span>
+</b>
+<small>
+<span data-i18n="launch.desc1">Shop, wholesale or online</span>
+</small>
+<em class="launch-choose">
+<span data-i18n="launch.choose">Choose</span>
+<span aria-hidden="true">→</span>
+</em>
+</button>
+<button type="button" data-launch-option="2">
+<span aria-hidden="true">U</span>
+<b>
+<span data-i18n="launch.o0.2">Uzum Market</span>
+</b>
+<small>
+<span data-i18n="launch.desc2">Marketplace sales</span>
+</small>
+<em class="launch-choose">
+<span data-i18n="launch.choose">Choose</span>
+<span aria-hidden="true">→</span>
+</em>
+</button>
+<button type="button" data-launch-option="3">
+<span aria-hidden="true">…</span>
+<b>
+<span data-i18n="launch.o0.3">Still deciding</span>
+</b>
+<small>
+<span data-i18n="launch.desc3">Help me decide</span>
+</small>
+<em class="launch-choose">
+<span data-i18n="launch.choose">Choose</span>
+<span aria-hidden="true">→</span>
+</em>
+</button>
+</div>
+</div>
+<div class="launch-foot">
+<svg aria-hidden="true">
+<use href="#i-shield">
+</use>
+</svg>
+<span data-i18n="launch.foot">Instant result · No phone number needed</span>
+</div>
+</section></div>
   </div>
 
   <div class="container">
@@ -442,48 +484,178 @@ ym(113132820,'init',{
 
 <!-- ═══════════════ Налоги ═══════════════ -->
 <section class="section" id="taxes">
-  <div class="container">
-    <div class="section__head reveal">
-      <span class="section__kicker" data-i18n="taxes.kicker">Taxation</span>
-      <h2 data-i18n="taxes.h2">Tax regimes in Uzbekistan</h2>
-      <p class="section__sub" data-i18n="taxes.sub">The regime you choose affects not only the rates but also the requirements for your legal address.</p>
-    </div>
-
-    <div class="grid grid--3" style="margin-bottom:20px">
-      <article class="card card--hover reveal">
-        <div class="card__icon"><svg aria-hidden="true"><use href="#i-percent"></use></svg></div>
-        <h3 data-i18n="taxes.simple.title">Simplified tax regime</h3>
-        <ul class="card__list"><li data-i18n="taxes.simple.li1">Turnover tax — 4%</li></ul>
-      </article>
-      <article class="card card--hover reveal">
-        <div class="card__icon"><svg aria-hidden="true"><use href="#i-percent"></use></svg></div>
-        <h3 data-i18n="taxes.general.title">General tax regime</h3>
-        <ul class="card__list"><li data-i18n="taxes.general.li1">VAT — 12%</li><li data-i18n="taxes.general.li2">Profit tax — 15%</li></ul>
-      </article>
-      <article class="card card--hover reveal">
-        <div class="card__icon"><svg aria-hidden="true"><use href="#i-support"></use></svg></div>
-        <h3 data-i18n="taxes.payroll.title">Payroll taxes</h3>
-        <ul class="card__list"><li data-i18n="taxes.payroll.li1">Social tax — 12%</li><li data-i18n="taxes.payroll.li2">Personal income tax — 12%</li></ul>
-      </article>
-    </div>
-
-    <article class="card reveal">
-      <div class="card__icon"><svg aria-hidden="true"><use href="#i-pin"></use></svg></div>
-      <h3 data-i18n="taxes.address.title">Legal address and cadastral number</h3>
-      <div class="grid grid--2" style="margin-top:18px;gap:16px">
-        <div style="padding:18px;background:var(--bg-soft);border-radius:var(--r-md)">
-          <span class="section__kicker" style="margin-bottom:10px" data-i18n="taxes.address.badge1">Simplified</span>
-          <div style="font-size:1.1rem;font-weight:600;letter-spacing:-.02em" data-i18n="taxes.address.val1">No floor-area restriction</div>
-          <p class="card__text" data-i18n="taxes.address.simple">Under the simplified regime there is no floor-area restriction — a small space is enough.</p>
-        </div>
-        <div style="padding:18px;background:var(--bg-soft);border-radius:var(--r-md)">
-          <span class="section__kicker" style="margin-bottom:10px" data-i18n="taxes.address.badge2">General, with VAT</span>
-          <div style="font-size:1.1rem;font-weight:600;letter-spacing:-.02em" data-i18n="taxes.address.val2">from 18 m²</div>
-          <p class="card__text" data-i18n="taxes.address.general">Under the general regime (with VAT) an office of at least 18 m² is required.</p>
-        </div>
-      </div>
-    </article>
-  </div>
+<div class="container">
+<div class="section__head">
+<span class="section__kicker">
+<span data-i18n="tax26.kicker">Taxation · 2026</span>
+</span>
+<h2>
+<span data-i18n="tax26.title">Taxes for sole proprietors and LLCs in Uzbekistan</span>
+</h2>
+<p class="section__sub">
+<span data-i18n="tax26.sub">Main rates and the annual income threshold for choosing a tax regime.</span>
+</p>
+</div>
+<div class="grid grid--2 tax-pair">
+<article class="card">
+<span class="section__kicker">
+<span data-i18n="tax26.ip">Sole proprietor</span>
+</span>
+<h3>
+<span data-i18n="tax26.ipTitle">Sole proprietor — turnover tax</span>
+</h3>
+<div class="tax-rate">1% <span>
+<span data-i18n="tax26.turnover">of turnover</span>
+</span>
+</div>
+<p class="card__text">
+<span data-i18n="tax26.ipText">When using the turnover tax regime.</span>
+</p>
+<ul class="card__list">
+<li>
+<strong>
+<span data-i18n="tax26.threshold">Annual threshold — 12,000 BCU</span>
+</strong>
+</li>
+<li>
+<span data-i18n="tax26.amount">At the BCU effective September 2026 — UZS 5.28 billion</span>
+</li>
+</ul>
+<p class="tax-note">
+<span data-i18n="tax26.ipNote">Social tax for yourself is paid separately.</span>
+</p>
+</article>
+<article class="card">
+<span class="section__kicker">
+<span data-i18n="tax26.llc">Limited liability company</span>
+</span>
+<h3>
+<span data-i18n="tax26.llcTitle">LLC — turnover tax</span>
+</h3>
+<div class="tax-rate">4% <span>
+<span data-i18n="tax26.turnover">of turnover</span>
+</span>
+</div>
+<p class="card__text">
+<span data-i18n="tax26.llcText">Base rate. Some activities have special rules.</span>
+</p>
+<ul class="card__list">
+<li>
+<strong>
+<span data-i18n="tax26.threshold">Annual threshold — 12,000 BCU</span>
+</strong>
+</li>
+<li>
+<span data-i18n="tax26.amount">At the BCU effective September 2026 — UZS 5.28 billion</span>
+</li>
+</ul>
+<p class="tax-note">
+<span data-i18n="tax26.llcNote">Payroll taxes are paid separately.</span>
+</p>
+</article>
+</div>
+<article class="card tax-limit">
+<h3>
+<span data-i18n="tax26.limitTitle">What does the turnover threshold mean?</span>
+</h3>
+<p class="card__text">
+<span data-i18n="tax26.limitText">This is a calendar-year threshold for the tax regime. Your business may earn more; the tax rules change.</span>
+</p>
+<div class="grid grid--2 tax-panels">
+<div>
+<span class="section__kicker">
+<span data-i18n="tax26.below">At or below the threshold</span>
+</span>
+<h4>
+<span data-i18n="tax26.belowAmount">Up to UZS 5,280,000,000 a year</span>
+</h4>
+<p>
+<span data-i18n="tax26.belowText">Turnover tax may apply if your activity and tax status qualify for this regime.</span>
+</p>
+</div>
+<div>
+<span class="section__kicker">
+<span data-i18n="tax26.above">Above the threshold</span>
+</span>
+<h4>
+<span data-i18n="tax26.aboveAmount">Over UZS 5,280,000,000 a year</span>
+</h4>
+<p>
+<span data-i18n="tax26.aboveText">A transition to the general regime becomes necessary. Your business continues operating; the tax rules change.</span>
+</p>
+</div>
+</div>
+<p class="tax-note">
+<span data-i18n="tax26.limitNote">The 12,000 BCU threshold applies from 1 June 2026. UZS 5.28 billion uses a BCU of UZS 440,000 and changes with the BCU. Existing businesses must account for previous regime transitions.</span>
+</p>
+</article>
+<div class="grid grid--2 tax-pair tax-bottom">
+<article class="card">
+<h3>
+<span data-i18n="tax26.general">General tax regime</span>
+</h3>
+<ul class="card__list">
+<li>
+<span data-i18n="tax26.vat">VAT — 12%</span>
+</li>
+<li>
+<span data-i18n="tax26.profit">Base profit tax — 15%</span>
+</li>
+</ul>
+<p class="tax-note">
+<span data-i18n="tax26.generalNote">VAT follows VAT rules; profit tax is charged on taxable profit.</span>
+</p>
+</article>
+<article class="card">
+<h3>
+<span data-i18n="tax26.payroll">LLC payroll</span>
+</h3>
+<ul class="card__list">
+<li>
+<span data-i18n="tax26.pit">Personal income tax — 12%</span>
+</li>
+<li>
+<span data-i18n="tax26.social">Employer social tax — usually 12%</span>
+</li>
+</ul>
+<p class="tax-note">
+<span data-i18n="tax26.payrollNote">Budget separately for the director’s salary and accounting.</span>
+</p>
+</article>
+</div>
+<details class="card tax-details">
+<summary>
+<span data-i18n="tax26.details">Tax details and exceptions</span>
+<span class="tax-toggle" aria-hidden="true">+</span>
+</summary>
+<div class="tax-detail-text">
+<p>
+<span data-i18n="tax26.detail1">Turnover tax is not available to every business: activity, tax status and previous transitions matter. Eligibility for new businesses is checked separately.</span>
+</p>
+<p>
+<span data-i18n="tax26.detail2">Sole proprietors pay their own social tax separately: generally at least 1 BCU per month. Exceptions apply to some categories.</span>
+</p>
+<p>
+<span data-i18n="tax26.detail3">Eligible trade, service and catering businesses may opt for simplified VAT: 6% VAT, 0% profit tax and no input VAT credit. This regime is not automatic.</span>
+</p>
+<p>
+<span data-i18n="tax26.detail4">We help choose a regime based on your activity, turnover, employees and founder status.</span>
+</p>
+</div>
+</details>
+<div class="tax-footer">
+<a class="btn btn--primary" href="#contact">
+<span data-i18n="tax26.cta">Get tax advice</span>
+</a>
+<p>
+<span data-i18n="tax26.verified">Checked: 8 October 2026</span> · <a href="https://lex.uz/ru/docs/8237115">УП-100</a> · <a href="https://www.lex.uz/uz/acts/4674893?ONDATE=06.08.2026+00">
+<span data-i18n="tax26.code">Tax Code</span>
+</a> · <a href="https://advice.adliya.uz/oz/document/3998">
+<span data-i18n="tax26.brv">BCU amount</span>
+</a>
+</p>
+</div>
+</div>
 </section>
 
 <!-- ═══════════════ Банк ═══════════════ -->
@@ -933,8 +1105,8 @@ ym(113132820,'init',{
 </dialog>
 
 <script defer src="site.config.js?v=90e9c4aea957"></script>
-<script defer src="assets/js/i18n.js?v=74ddb225a848"></script>
+<script defer src="assets/js/i18n.js?v=bd66c28054ba"></script>
 <script defer src="assets/js/reviews.js?v=da36d63d8ae0"></script>
-<script defer src="assets/js/app.js?v=c5695539f676"></script>
+<script defer src="assets/js/app.js?v=3c340c48242a"></script>
 </body>
 </html>
