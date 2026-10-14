@@ -11,6 +11,7 @@ const commonSources = {
 };
 
 module.exports = [
+  require('./article-12.cjs'),
   {
     slug:'ooo-v-uzbekistane-udalenno',
     title:'Можно ли открыть ООО в Узбекистане удалённо иностранцу',

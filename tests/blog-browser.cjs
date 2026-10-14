@@ -12,13 +12,13 @@ async function run(){
   const base='http://127.0.0.1:'+server.address().port;
   const browser=await chromium.launch({channel:process.env.BROWSER_CHANNEL||'msedge',headless:true});
   try{
-    const routes=['/blog/otkryt-ooo-v-uzbekistane/','/blog/ooo-v-uzbekistane-udalenno/','/blog/nalogi-ooo-v-uzbekistane/','/blog/ooo-ili-ip-v-uzbekistane/'];
+    const routes=['/blog/posle-registratsii-ooo-v-uzbekistane/','/blog/otkryt-ooo-v-uzbekistane/','/blog/ooo-v-uzbekistane-udalenno/','/blog/nalogi-ooo-v-uzbekistane/','/blog/ooo-ili-ip-v-uzbekistane/'];
     for(const width of [390,1440]){
       const context=await browser.newContext({viewport:{width,height:1000},reducedMotion:'reduce'});
       await context.route(/https:\/\//,route=>route.fulfill({status:200,body:''}));
       const page=await context.newPage();const errors=[];
       page.on('pageerror',error=>errors.push(error.message));
-      await page.goto(base+routes[width===390?1:2],{waitUntil:'networkidle'});
+      await page.goto(base+routes[0],{waitUntil:'networkidle'});
       assert.equal(await page.locator('h1').count(),1);
       assert.equal(await page.locator('.facts .fact').count(),3);
       assert.ok(await page.locator('.faq details').count()>=6);
@@ -28,13 +28,14 @@ async function run(){
       assert.deepEqual(errors,[]);
       await page.screenshot({path:path.join(output,'article-'+width+'-top.png')});
       await page.screenshot({path:path.join(output,'article-'+width+'.png'),fullPage:true});
+      await page.screenshot({path:path.join(output,'article-hero-'+width+'.png')});
       await context.close();
     }
     const context=await browser.newContext({viewport:{width:390,height:900}});
     const page=await context.newPage();
     await page.goto(base+'/blog/',{waitUntil:'domcontentloaded'});
-    assert.equal(await page.locator('.article-list .article-card').count(),11);
-    assert.equal(await page.locator('.article-card').first().getAttribute('href'),'/blog/otkryt-ooo-v-uzbekistane/');
+    assert.equal(await page.locator('.article-list .article-card').count(),12);
+    assert.equal(await page.locator('.article-card').first().getAttribute('href'),'/blog/posle-registratsii-ooo-v-uzbekistane/');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
     await page.screenshot({path:path.join(output,'index-390.png'),fullPage:true});
     for(const route of routes){
