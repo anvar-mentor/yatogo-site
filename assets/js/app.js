@@ -833,11 +833,18 @@
   var launchAnswers = [];
   var launchOptionCounts = [4, 2, 4, 3];
   var lastLaunchComment = '';
-  function launchPlan() {
-    if (launchAnswers[0] === 3 || launchAnswers[2] === 3 || launchAnswers[3] === 2) return 'Consultation';
-    if (launchAnswers[2] === 2) return 'Premium';
-    if (launchAnswers[1] === 1 || launchAnswers[2] === 1) return 'Business';
-    return 'Classic';
+  function launchSteps() {
+    return [
+      launchAnswers[0] === 3 ? 'choose' : 'activity',
+      launchAnswers[1] === 1 ? 'foreign' : 'documents',
+      launchAnswers[3] === 0 ? 'remote' : launchAnswers[3] === 1 ? 'visit' : 'format',
+      launchAnswers[2] === 2 ? 'accounting' : launchAnswers[0] === 2 ? 'market' : 'ready'
+    ];
+  }
+  function launchSummary() {
+    return t('launch.message') + '\n\n' + launchAnswers.map(function(answer, i) {
+      return t('launch.client' + i + '.' + answer);
+    }).join('\n') + '\n\n' + t('launch.messageEnd');
   }
   function launchEscape(value) {
     return String(value).replace(/[&<>"']/g, function (c) {
@@ -848,10 +855,9 @@
     var body = $('#launchBody');
     if (!body) return;
     var esc = launchEscape;
-    $('#launchCount').textContent = launchStep < 4 ? t('launch.step').replace('{n}', launchStep + 1) : '4 / 4';
     var content;
     if (launchStep < 4) {
-      content = '<div class="launch-progress" aria-hidden="true">' + [0,1,2,3].map(function(i) {
+      content = '<p class="launch-step-label">' + esc(t('launch.step').replace('{n}', launchStep + 1)) + '</p><div class="launch-progress" aria-hidden="true">' + [0,1,2,3].map(function(i) {
         return '<i' + (i <= launchStep ? ' style="background:#0b7a5b"' : '') + '></i>';
       }).join('') + '</div><h3 id="launchQuestion" tabindex="-1">' + esc(t('launch.q' + launchStep)) + '</h3>'
         + '<p class="launch-hint">' + esc(t('launch.hint')) + '</p><div class="launch-options">';
@@ -864,24 +870,15 @@
       }
       content += '</div>' + (launchStep ? '<button type="button" class="launch-back" data-launch-back>← ' + esc(t('launch.back')) + '</button>' : '');
     } else {
-      var plan = launchPlan();
-      var days = {Classic:'10',Business:'5',Premium:'2'}[plan];
-      if (plan === 'Consultation') {
-        content = '<div class="launch-result launch-consultation"><p>' + esc(t('launch.consultIntro')) + '</p>'
-          + '<h3 id="launchQuestion" tabindex="-1">' + esc(t('launch.consultTitle')) + '</h3>'
-          + '<div class="launch-price">0 $</div><p>' + esc(t('launch.consultText')) + '</p>'
-          + '<p class="launch-small">' + esc(t('launch.consultNote')) + '</p>'
-          + '<button type="button" class="btn btn--primary" data-launch-discuss>' + esc(t('launch.consultCta')) + '</button>'
-          + '<button type="button" class="launch-restart" data-launch-restart>' + esc(t('launch.restart')) + '</button></div>';
-      } else {
-      content = '<div class="launch-result"><p>' + esc(t('launch.result')) + '</p><h3 id="launchQuestion" tabindex="-1">' + plan + '</h3>'
-        + '<div class="launch-price">' + {Classic:'650',Business:'900',Premium:'1 150'}[plan] + ' $</div>'
-        + '<div class="launch-days">' + esc(t('plans.days' + days)) + ' ' + esc(t('plans.daysLabel')) + '</div>'
-        + '<p>' + esc(t('launch.reason' + plan)) + '</p><p class="launch-small">' + esc(t('launch.extra')) + '</p>'
-        + (launchAnswers[3] !== 1 ? '<p class="launch-small">' + esc(t('launch.remote')) + '</p>' : '')
-        + '<button type="button" class="btn btn--primary" data-launch-discuss>' + esc(t('launch.discuss')) + '</button>'
+      content = '<div class="launch-result"><p class="launch-step-label">' + esc(t('launch.complete')) + '</p>'
+        + '<h3 id="launchQuestion" tabindex="-1">' + esc(t('launch.routeTitle')) + '</h3>'
+        + '<p class="launch-route-intro">' + esc(t('launch.routeIntro')) + '</p>'
+        + '<ol class="launch-route">' + launchSteps().map(function(key) {
+          return '<li><b>' + esc(t('launch.route.' + key)) + '</b><span>' + esc(t('launch.route.' + key + '.detail')) + '</span></li>';
+        }).join('') + '</ol><div class="launch-timing"><b>' + esc(t('launch.timingTitle')) + '</b><p>' + esc(t('launch.timing')) + '</p>'
+        + (launchAnswers[1] === 1 || launchAnswers[3] !== 1 ? '<p>' + esc(t('launch.timingExtra')) + '</p>' : '') + '</div>'
+        + '<a class="btn btn--primary" data-launch-discuss href="https://t.me/' + tgHandle + '?text=' + encodeURIComponent(launchSummary()) + '" target="_blank" rel="noopener">' + esc(t('launch.write')) + '</a>'
         + '<button type="button" class="launch-restart" data-launch-restart>' + esc(t('launch.restart')) + '</button></div>';
-      }
     }
     body.innerHTML = content;
     if (focus) $('#launchQuestion').focus({preventScroll:true});
@@ -901,18 +898,6 @@
       } else if (event.target.closest('[data-launch-restart]')) {
         launchStep = 0;
         renderLaunchBuilder(true);
-      } else if (event.target.closest('[data-launch-discuss]')) {
-        var summary = t('launch.title') + '\n' + launchAnswers.map(function(answer,i) {
-          return t('launch.q'+i) + ' ' + t('launch.o'+i+'.'+answer);
-        }).join('\n');
-        var comment = $('#f-comment');
-        if (comment) {
-          var existing = comment.value;
-          if (lastLaunchComment) existing = existing.replace(lastLaunchComment, '').trim();
-          comment.value = (existing ? existing + '\n\n' : '') + summary;
-          lastLaunchComment = summary;
-        }
-        showPlanForm(launchPlan(), 'launch');
       }
     });
     renderLaunchBuilder(false);
