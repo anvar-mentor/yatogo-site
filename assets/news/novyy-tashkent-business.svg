@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#e7f4ed"/><stop offset="1" stop-color="#f6f8f5"/></linearGradient><linearGradient id="tower" x2="1" y2="1"><stop stop-color="#108365"/><stop offset="1" stop-color="#075240"/></linearGradient><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#0b7a5b" stroke-opacity=".055"/></pattern></defs>
+<rect width="1200" height="675" fill="url(#bg)"/><rect width="1200" height="675" fill="url(#grid)"/>
+<circle cx="1050" cy="70" r="240" fill="#d5eade" opacity=".7"/>
+<rect x="64" y="58" width="200" height="43" rx="21" fill="#0b7a5b"/>
+<text x="164" y="87" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="20" letter-spacing="3" fill="white">YATOGO</text>
+<text x="64" y="205" font-family="Arial,sans-serif" font-weight="700" font-size="22" letter-spacing="3" fill="#0b7a5b">БИЗНЕС И ИНВЕСТИЦИИ</text>
+<text x="60" y="292" font-family="Arial,sans-serif" font-weight="700" font-size="70" fill="#142722">Новый</text>
+<text x="60" y="374" font-family="Arial,sans-serif" font-weight="700" font-size="70" fill="#142722">Ташкент</text>
+<path d="M64 416H228" stroke="#0b7a5b" stroke-width="6" stroke-linecap="round"/>
+<text x="64" y="468" font-family="Arial,sans-serif" font-size="24" fill="#526a60">Возможности для бизнеса</text>
+<text x="64" y="510" font-family="Arial,sans-serif" font-size="24" fill="#526a60">Объясняем главное</text>
+<g transform="translate(575 118)">
+<ellipse cx="260" cy="455" rx="286" ry="51" fill="#0b7a5b" opacity=".09"/>
+<path d="M10 413L284 335 556 428 279 514Z" fill="#d0e7d9"/>
+<path d="M50 403L293 342 513 419 271 484Z" fill="#f8fcf8"/>
+<path d="M75 415L330 348M190 463L436 393" stroke="#c4dccd" stroke-width="12"/>
+<path d="M175 101L305 65V381L175 420Z" fill="url(#tower)"/>
+<path d="M305 65L374 102V399L305 381Z" fill="#063f33"/>
+<path d="M175 101L245 137 374 102 305 65Z" fill="#53b497"/>
+<path d="M200 143L279 123M200 182L279 162M200 221L279 201M200 260L279 240M200 299L279 279M200 338L279 318M200 377L279 357" stroke="#b6e5d0" stroke-width="10" opacity=".8"/>
+<path d="M319 124L354 143M319 168L354 187M319 212L354 231M319 256L354 275M319 300L354 319M319 344L354 363" stroke="#78b99d" stroke-width="8" opacity=".6"/>
+<path d="M43 250L142 226 204 258 105 287Z" fill="#fff"/><path d="M43 250V400L105 432V287Z" fill="#7cbda2"/><path d="M105 287L204 258V405L105 432Z" fill="#c0dfcc"/>
+<path d="M122 315L183 297M122 350L183 332M122 385L183 367" stroke="#4b9273" stroke-width="9"/>
+<path d="M377 256L460 236 519 267 437 289Z" fill="#fff"/><path d="M377 256V413L437 443V289Z" fill="#96c8af"/><path d="M437 289L519 267V422L437 443Z" fill="#e3f0e6"/>
+<path d="M452 314L502 300M452 350L502 336M452 386L502 372" stroke="#82b399" stroke-width="8"/>
+<g stroke="#497358" stroke-width="5"><path d="M15 425V377M333 463V419M541 440V390"/></g>
+<g fill="#599974"><circle cx="15" cy="365" r="27"/><circle cx="333" cy="407" r="28"/><circle cx="541" cy="377" r="30"/></g>
+<g fill="#88b994"><circle cx="5" cy="356" r="18"/><circle cx="323" cy="397" r="18"/><circle cx="530" cy="365" r="20"/></g>
+</g><text x="64" y="622" font-family="Arial,sans-serif" font-size="16" letter-spacing="2" fill="#6d8478">РЕДАКЦИОННАЯ ИЛЛЮСТРАЦИЯ</text></svg>

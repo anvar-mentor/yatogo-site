@@ -214,8 +214,10 @@
       });
     });
     document.addEventListener('click', closeLang);
+    document.addEventListener('click', function (e) { $$('.nav-group[open]').forEach(function (g) { if (!g.contains(e.target)) g.open = false; }); });
+    $$('.nav-group a').forEach(function (a) { a.addEventListener('click', function () { a.closest('details').open = false; }); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { closeLang(); closeNav(); }
+      if (e.key === 'Escape') { closeLang(); closeNav(); $$('.nav-group[open]').forEach(function (g) { g.open = false; }); }
     });
 
     var burger = $('#burger');
