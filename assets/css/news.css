@@ -31,3 +31,32 @@
 @media(max-width:480px){.news-shell{width:calc(100% - 32px)}.news-header__inner{min-height:72px;gap:14px}.news-brand{font-size:1.1rem}.news-header__cta{display:none}.news-breadcrumbs{padding:24px 0;font-size:.75rem}.news-article-head{margin:8px 0 26px}.news-page h1{font-size:2rem;line-height:1.2}.news-meta{font-size:.73rem;gap:8px 14px}.news-cover{margin-bottom:28px}.news-cover img{border-radius:16px}.news-cover figcaption{font-size:.69rem}.news-body{padding:20px;border-radius:20px}.news-body h2{font-size:1.3rem}.news-body p,.news-body li{font-size:.95rem}.news-quick{padding:18px}.news-quick h2{font-size:1rem}.news-related{padding:18px}.news-index-head{padding:12px 0 30px}.news-guides h3{font-size:1.4rem}}
 @media(prefers-reduced-motion:reduce){.news-card{transition:none}}
 @media(max-width:800px){.news-home-layout--many .news-home-feed{grid-template-columns:1fr}}
+
+/* Compact editorial openings; readable body columns remain independent. */
+@media(min-width:1101px){
+ .news-header__inner{display:grid;grid-template-columns:1fr auto 1fr;gap:24px}
+ .news-brand{margin-right:0}
+ .news-desktop-nav{justify-self:center}
+}
+.news-breadcrumbs{padding:24px 0}
+.news-index-head{display:grid;grid-template-columns:1.1fr 1fr;column-gap:48px;align-items:center;padding:12px 0 32px}
+.news-index-head>.news-eyebrow{grid-column:1/-1}
+.news-index-head h1{font-size:clamp(2rem,3.4vw,3rem);margin:14px 0 0}
+.news-index-intro .news-lead{margin:0 0 18px;font-size:1.05rem}
+.news-article-hero{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:center;margin:8px 0 32px}
+.news-article-head{max-width:none;margin:0}
+.news-article-head h1{font-size:clamp(2rem,2.8vw,2.75rem);margin:14px 0 18px;line-height:1.18;text-wrap:balance}
+.news-article-head .news-lead{font-size:1rem;line-height:1.65;margin-bottom:20px}
+.news-article-hero .news-cover{margin:0;min-width:0}
+.news-footer{margin-top:40px;padding:28px 0}
+.news-index-bottom{margin-bottom:0;padding:28px}
+@media(max-width:800px){
+ .news-index-head,.news-article-hero{display:block}
+ .news-index-head h1{margin:12px 0 18px}
+ .news-article-head{margin-bottom:24px}
+ .news-article-head h1{font-size:clamp(1.85rem,5vw,2.5rem)}
+ .news-article-hero{margin:0 0 28px}
+ .news-breadcrumbs{padding:20px 0}
+}
+
+@media(min-width:1101px){.news-header__cta{justify-self:end}.news-header .news-brand{justify-self:start}}
