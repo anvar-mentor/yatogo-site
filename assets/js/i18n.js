@@ -1296,3 +1296,34 @@ Object.assign(window.I18N.uz, {'form.service.ipShort': 'YTTni ro‘yxatdan o‘t
 Object.assign(window.I18N.ru, {'contact.waGreeting': 'Здравствуйте! Обращаюсь с сайта YATOGO. Хочу обсудить открытие бизнеса в Узбекистане. Подскажите, с чего начать?'});
 Object.assign(window.I18N.en, {'contact.waGreeting': 'Hello! I found you through the YATOGO website. I would like to discuss starting a business in Uzbekistan. Could you advise me on where to begin?'});
 Object.assign(window.I18N.uz, {'contact.waGreeting': 'Assalomu alaykum! YATOGO sayti orqali murojaat qilyapman. O‘zbekistonda biznes ochishni muhokama qilmoqchiman. Nimadan boshlashni maslahat berasiz?'});
+
+Object.assign(window.I18N.ru, {
+  'nav.business':'Открытие бизнеса','nav.news':'Новости',
+  'news.kicker':'Новости','news.heading':'Что меняется для бизнеса',
+  'news.intro':'Налоги, законы и возможности для предпринимателей в Узбекистане.',
+  'news.language':'Материалы на русском языке','news.all':'Все новости','news.read':'Читать новость ↗',
+  'news.guidesTag':'Полезно знать','news.guidesHeading':'От новости — к плану действий',
+  'news.guidesIntro':'Подробные инструкции для вашего запуска — в блоге YATOGO.',
+  'news.guideOne':'Что делать после регистрации ООО','news.guideTwo':'Как открыть компанию по доверенности',
+  'news.allGuides':'Все статьи и инструкции →'
+});
+Object.assign(window.I18N.en, {
+  'nav.business':'Start a business','nav.news':'News',
+  'news.kicker':'News','news.heading':'What is changing for business',
+  'news.intro':'Taxes, legislation and opportunities for entrepreneurs in Uzbekistan.',
+  'news.language':'News articles are in Russian','news.all':'All news','news.read':'Read the news ↗',
+  'news.guidesTag':'Useful guides','news.guidesHeading':'From news to your next steps',
+  'news.guidesIntro':'Find detailed business launch guides in the YATOGO blog.',
+  'news.guideOne':'What to do after registering an LLC','news.guideTwo':'Register a company by power of attorney',
+  'news.allGuides':'All articles and guides →'
+});
+Object.assign(window.I18N.uz, {
+  'nav.business':'Biznes ochish','nav.news':'Yangiliklar',
+  'news.kicker':'Yangiliklar','news.heading':'Biznes uchun nimalar o‘zgarmoqda',
+  'news.intro':'O‘zbekistondagi tadbirkorlar uchun soliqlar, qonunlar va imkoniyatlar.',
+  'news.language':'Materiallar rus tilida','news.all':'Barcha yangiliklar','news.read':'Yangilikni o‘qish ↗',
+  'news.guidesTag':'Foydali ma’lumotlar','news.guidesHeading':'Yangilikdan — amaliy rejaga',
+  'news.guidesIntro':'Biznes boshlash bo‘yicha batafsil qo‘llanmalar YATOGO blogida.',
+  'news.guideOne':'MChJ ro‘yxatdan o‘tgandan keyingi qadamlar','news.guideTwo':'Ishonchnoma orqali kompaniya ochish',
+  'news.allGuides':'Barcha maqolalar va qo‘llanmalar →'
+});

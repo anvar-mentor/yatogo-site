@@ -45,3 +45,6 @@ const urls=[['/',null],['/blog/',all[0].published],...all.map(a=>[`/blog/${a.slu
 const sitemap=`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u,d])=>`  <url>\n    <loc>${site}${u}</loc>${d?`\n    <lastmod>${d}</lastmod>`:''}\n  </url>`).join('\n')}\n</urlset>\n`;
 fs.writeFileSync(path.join(root,'sitemap.xml'),sitemap);
 console.log(`Built ${articles.length} articles, blog index and sitemap.`);
+
+// Keep news URLs when rebuilding the combined sitemap.
+require('./build-news.cjs').build();

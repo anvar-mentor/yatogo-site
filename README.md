@@ -1,5 +1,26 @@
 # YATOGO: SEO branch
 
+## News publishing
+
+Read `EDITORIAL.md` before writing. Always show desktop and mobile screenshots
+and wait for the owner's approval of that preview before merging or deploying.
+
+News content lives in `content/news.cjs`. Every item needs its own cover, alt,
+credit, rights note, official source, event date and actual publication date.
+Store covers under `assets/news/`; the first cover includes its editable SVG
+and a 1200×675 PNG used on cards, the article page and social previews.
+
+Build with `node scripts/build-blog.cjs` followed by `node scripts/build-seo.cjs`.
+The blog build also rebuilds news and preserves news URLs in the sitemap.
+After a news-only edit, `node scripts/build-news.cjs` and then the SEO build
+refresh news pages, the home feed, translations and resource cache versions.
+Do not hand-edit the generated `/news/` pages or the home news block.
+
+Run `node --test tests/news.test.cjs tests/seo.test.cjs tests/blog.test.cjs`
+and the browser suites `tests/news-browser.cjs` and `tests/browser.cjs`.
+The browser suites accept `PLAYWRIGHT_MODULE_PATH`, `BROWSER_CHANNEL` and
+`TEST_OUTPUT_DIR`. Never send real test messages.
+
 Production baseline: `server-current`, starting commit `5f781226816ccdd87254922f90331e38e4fa490d`.
 Work happens on `seo-optimization`. `main` is not the production source.
 No script in this repository deploys automatically.
