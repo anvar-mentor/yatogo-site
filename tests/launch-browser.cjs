@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict'),path=require('path');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE_PATH || 'playwright');
 const {createServer}=require('../scripts/preview.cjs');
-(async()=>{const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({channel:'msedge',headless:true});try{
+(async()=>{const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({channel:process.env.BROWSER_CHANNEL||'msedge',headless:true});try{
 for(const width of [320,390,768,1440])for(const lang of ['ru','en','uz']){
 const ctx=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});await ctx.route(/https:\/\//,r=>r.fulfill({status:200,body:''}));const p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:'+server.address().port+'/?lang='+lang);await p.evaluate(()=>document.fonts.ready);
 assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.equal(await p.locator('[data-launch-option]').count(),4);
