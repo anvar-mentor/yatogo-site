@@ -1,5 +1,5 @@
 'use strict';
-module.exports = [{
+module.exports = [...require('./news-october-19.cjs'), {
   slug:'novyy-tashkent-vozmozhnosti-dlya-biznesa',
   title:'Бизнес в Новом Ташкенте: какие возможности для инвесторов анонсированы',
   description:'Какие возможности для бизнеса анонсированы в Новом Ташкенте и что предпринимателю проверить до участия в инвестиционном проекте.',

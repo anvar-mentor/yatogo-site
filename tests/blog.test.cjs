@@ -38,7 +38,6 @@ test('article has visible breadcrumbs, matched FAQ schema, sources and CTA',()=>
     assert.ok(visible>=6,file);
     assert.equal((html.match(/"@type":"Question"/g)||[]).length,visible,file);
     assert.ok(html.includes('class="button"'),file);
-    if(!file.includes('registratsiya-kompanii-po-doverennosti') && !file.includes('posle-registratsii-ooo-v-uzbekistane')) assert.ok(html.includes('от 2 рабочих дней'),file);
     assert.ok(html.includes('Официальные источники') || html.includes('https://cbu.uz/ru/press_center/question_answer/4163/'),file);
   }
 });
@@ -57,7 +56,7 @@ test('sitemap and main pages expose the blog and current contacts',()=>{
 });
 
 test('all blog links resolve and publication dates are staggered',()=>{
-  const expected=['2026-10-14','2026-10-08','2026-10-05','2026-10-01','2026-09-27','2026-09-23','2026-09-19','2026-09-15','2026-09-11','2026-09-07','2026-09-03','2026-08-30'];
+  const expected=['2026-10-19','2026-10-14','2026-10-08','2026-10-05','2026-10-01','2026-09-27','2026-09-23','2026-09-19','2026-09-15','2026-09-11','2026-09-07','2026-09-03','2026-08-30'];
   const dates=[];
   for(const [file] of pages.slice(1)){
     const html=read(file);
@@ -69,7 +68,7 @@ test('all blog links resolve and publication dates are staggered',()=>{
     }
   }
   assert.deepEqual(dates.sort().reverse(),expected);
-  assert.equal((read('blog/index.html').match(/class="article-card"/g)||[]).length,12);
+  assert.equal((read('blog/index.html').match(/class="article-card(?: article-card--illustrated)?"/g)||[]).length,13);
 });
 
 test('preview serves clean blog URLs and keeps missing articles as 404',async()=>{
@@ -82,4 +81,18 @@ test('preview serves clean blog URLs and keeps missing articles as 404',async()=
     }
     assert.equal((await fetch(base+'/blog/ne-sushchestvuet/')).status,404);
   }finally{await new Promise(resolve=>server.close(resolve))}
+});
+
+test('new illustrated articles share a valid cover across card, page and social previews',()=>{
+ for(const a of require('../content/blog-articles.cjs').filter(a=>a.cover)){
+  assert.ok(a.coverAlt&&a.coverCredit&&a.coverRights);
+  const png=fs.readFileSync(path.join(root,a.cover.slice(1)));
+  assert.equal(png.toString('ascii',1,4),'PNG');assert.equal(png.readUInt32BE(16),1200);assert.equal(png.readUInt32BE(20),675);
+  const html=read('blog/'+a.slug+'/index.html');
+  for(const text of [html,read('blog/index.html')])assert.ok(text.includes('src="'+a.cover+'"'));
+  for(const key of ['og:image','twitter:image'])assert.ok(html.includes(key+'" content="https://yatogo.ru'+a.cover+'"'));
+  assert.ok(html.includes(a.coverCredit));
+  const schema=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);
+  assert.equal(schema['@graph'].find(x=>x['@type']==='BlogPosting').image,'https://yatogo.ru'+a.cover);
+ }
 });

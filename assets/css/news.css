@@ -60,3 +60,5 @@
 }
 
 @media(min-width:1101px){.news-header__cta{justify-self:end}.news-header .news-brand{justify-self:start}}
+
+.news-home-layout--many .news-card{display:flex;flex-direction:column}.news-home-layout--many .news-card>img{flex:none}.news-home-layout--many .news-card__body{display:flex;flex-direction:column;flex:1}.news-home-layout--many .news-read{margin-top:auto}
