@@ -11,6 +11,7 @@ const commonSources = {
 };
 
 module.exports = [
+  require('./article-13.cjs'),
   require('./article-12.cjs'),
   {
     slug:'ooo-v-uzbekistane-udalenno',
