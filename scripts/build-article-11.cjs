@@ -28,7 +28,7 @@ html=html.replace('<meta name="robots" content="noindex,nofollow">','<meta name=
 .replace('<div class="breadcrumbs">Главная → Блог → Компания по доверенности</div>','<nav class="breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a> → <a href="/blog/">Блог</a> → Компания по доверенности</nav>');
 // Reuse the site counter; the preview contained no live analytics.
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const counter=home.match(/<!-- Yandex.Metrika counter -->[\s\S]*?<!-- \/Yandex.Metrika counter -->/);
+const counter=home.match(/<!-- Yandex.Metrika counter -->[\s\S]*?<!-- \/Google Ads tag -->/);
 if(!counter)throw new Error('Missing site analytics block');
 html=html.replace('</head>',counter[0]+'</head>');
 const out=path.join(root,'blog',slug);fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'index.html'),html);

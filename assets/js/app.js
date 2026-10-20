@@ -454,6 +454,8 @@
       if (!CFG.leadEndpoint) {
         setStatus('form.status.tg', 'ok');
         window.open('https://t.me/' + tgHandle + '?text=' + encodeURIComponent(message), '_blank', 'noopener');
+        // Для Google Ads клиент с готовой заявкой — это переход в Telegram, не лид.
+        if (window.yatogoAds) window.yatogoAds.conversion('telegram');
         form.reset();
         return;
       }
