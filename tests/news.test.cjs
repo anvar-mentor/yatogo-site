@@ -2,10 +2,12 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),items=require('../content/news.cjs');
 const read=f=>fs.readFileSync(path.join(root,f),'utf8').replace(/\r\n/g,'\n');
+const homeItems=items.slice().sort((a,b)=>b.published.localeCompare(a.published)).slice(0,3);
 test('every news item has a real cover on its page, card and social preview',()=>{
  for(const a of items){const file=path.join(root,a.cover.slice(1));assert.ok(fs.existsSync(file));assert.ok(a.coverAlt&&a.coverCredit&&a.coverRights);const b=fs.readFileSync(file);assert.equal(b.toString('ascii',1,4),'PNG');assert.equal(b.readUInt32BE(16),1200);assert.equal(b.readUInt32BE(20),675);
   const html=read('news/'+a.slug+'/index.html'),index=read('news/index.html'),home=read('index.html');
-  for(const text of [html,index,home])assert.ok(text.includes('src="'+a.cover+'"'));
+  for(const text of [html,index])assert.ok(text.includes('src="'+a.cover+'"'));
+  assert.equal(home.includes('src="'+a.cover+'"'),homeItems.includes(a),'home must show the latest three news covers');
   for(const p of ['og:image','twitter:image'])assert.ok(html.includes('content="https://yatogo.ru'+a.cover+'"'));
   assert.ok(html.includes(a.coverCredit));assert.ok(html.includes('alt="'+a.coverAlt+'"'));
  }
