@@ -63,4 +63,22 @@
 
 .news-home-layout--many .news-card{display:flex;flex-direction:column}.news-home-layout--many .news-card>img{flex:none}.news-home-layout--many .news-card__body{display:flex;flex-direction:column;flex:1}.news-home-layout--many .news-read{margin-top:auto}
 
-.news-index-list .news-card{display:flex;flex-direction:column}.news-index-list .news-card>img{flex:none}.news-index-list .news-card__body{display:flex;flex-direction:column;flex:1}.news-index-list .news-read{margin-top:auto}
+/* The feed is a compact list, not a stack of full-width article covers. */
+.news-index-list{gap:16px}
+.news-index-list .news-card{display:grid;grid-template-columns:minmax(180px,28%) minmax(0,1fr);align-items:start;gap:24px;padding:16px;border-radius:18px}
+.news-index-list .news-card>img{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;border-radius:10px}
+.news-index-list .news-card__body{display:flex;flex-direction:column;min-width:0;height:100%;padding:2px 4px 2px 0}
+.news-index-list .news-card h2{font-size:clamp(1.1rem,1.8vw,1.4rem);line-height:1.35;margin:8px 0}
+.news-index-list .news-card p{font-size:.9rem;line-height:1.55;margin:0 0 12px}
+.news-index-list .news-meta{font-size:.74rem;gap:4px 14px}
+.news-index-list .news-read{font-size:.8rem;margin-top:auto}
+@media(max-width:600px){
+ .news-index-list{gap:12px;grid-auto-rows:auto}
+ .news-index-list .news-card{grid-template-columns:100px minmax(0,1fr);gap:14px;padding:12px;border-radius:16px}
+ .news-index-list .news-card__body{padding:0}
+ .news-index-list .news-card h2{font-size:1rem;line-height:1.4;margin:6px 0 12px}
+ .news-index-list .news-card p{display:none}
+ .news-index-list .news-meta{font-size:.66rem;line-height:1.5;gap:2px 8px}
+ .news-index-list .news-read{font-size:.73rem}
+}
+@media(max-width:360px){.news-index-list .news-card{grid-template-columns:80px minmax(0,1fr);gap:10px;padding:10px}}
